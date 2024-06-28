@@ -11,19 +11,17 @@ export function ToolbarRepositioner() {
 
   toolbarRepositioner.addClass(styles.toolbarRepositioner);
 
-  toolbarRepositioner.attr({ width: '22', height: '22' });
+  toolbarRepositioner.attr({ width: '32', height: '32' });
 
-  toolbarRepositioner.viewbox(0, 0, 10, 10);
+  toolbarRepositioner.viewbox(0, 0, 32, 32);
 
   let caret = toolbarRepositioner.path();
 
   caret.attr({
-    'd': 'M 3 6 L 5 4 L 7 6',
+    'd': 'M 13 11 L 22 16 L 13 21 z',
     'stroke': 'white',
-    'stroke-width': '1',
-    'stroke-linecap': 'round',
-    'stroke-linejoin': 'round',
-    'fill': 'none',
+    'stroke-width': '0',
+    'fill': 'white',
   });
 
   return toolbarRepositioner.node;
