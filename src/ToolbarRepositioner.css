@@ -5,6 +5,8 @@
 
   background-color: black;
 
+  display: flex;
+
   border-radius: 1000px;
   box-shadow: rgba(0, 0, 0, 0.14) 0px 0px 22px;
 
