@@ -1,0 +1,22 @@
+.toolbarRepositioner {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+
+  background-color: black;
+
+  border-radius: 1000px;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 0px 22px;
+
+  cursor: pointer;
+}
+
+.toolbarRepositioner:hover {
+  transform: scale(1.15);
+  transition: transform 0.1s;
+}
+
+.toolbarRepositioner:active {
+  transform: scale(1);
+  transition: transform 0s;
+}
