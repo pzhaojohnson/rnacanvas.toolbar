@@ -4,18 +4,18 @@
   bottom: 15px;
 
   width: 122px;
-  height: 41px;
+  height: 43px;
 
-  background-color: black;
+  background-color: #111112;
 
   border: 1px solid white;
   border-radius: 6px;
   box-shadow: 0 0 22px rgba(0, 0, 0, 0.12);
 
-  padding: 0px 12px;
+  padding: 0px 14px;
 
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 26px;
+  gap: 25px;
 }
