@@ -1,14 +1,14 @@
 .toolbarRepositioner {
   position: absolute;
   left: 15px;
-  bottom: 20px;
+  bottom: 21px;
 
   background-color: black;
 
   display: flex;
 
   border-radius: 1000px;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 0px 22px;
+  box-shadow: #23232559 0px 0px 12px;
 
   cursor: pointer;
 }
