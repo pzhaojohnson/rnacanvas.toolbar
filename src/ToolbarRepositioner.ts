@@ -21,9 +21,9 @@ export function ToolbarRepositioner() {
 
   caretPath.attr({
     'd': 'M 13 11 L 22 16 L 13 21 z',
-    'stroke': 'white',
+    'stroke': 'rgb(231, 231, 242)',
     'stroke-width': '0',
-    'fill': 'white',
+    'fill': 'rgb(231, 231, 242)',
   });
 
   caret.addTo(toolbarRepositioner);
