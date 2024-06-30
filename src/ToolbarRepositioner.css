@@ -1,7 +1,7 @@
 .toolbarRepositioner {
   position: absolute;
   left: 15px;
-  bottom: 21px;
+  bottom: 22.5px;
 
   border-radius: 1000px;
 
@@ -30,7 +30,7 @@
 }
 
 .toolbarRepositioner:hover::before {
-  transform: scale(1.1);
+  transform: scale(1.166);
   transition: transform 0.1s;
 }
 

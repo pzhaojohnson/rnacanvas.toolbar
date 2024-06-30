@@ -13,14 +13,14 @@ export function ToolbarRepositioner() {
 
   let triangle = new SVG.Svg();
 
-  triangle.attr({ width: '32', height: '32' });
+  triangle.attr({ width: '30', height: '30' });
 
-  triangle.viewbox(0, 0, 32, 32);
+  triangle.viewbox(0, 0, 30, 30);
 
   let trianglePath = triangle.path();
 
   trianglePath.attr({
-    'd': 'M 13 11 L 22 16 L 13 21 z',
+    'd': 'M 12 10 L 21 15 L 12 20 z',
     'stroke': 'rgb(231, 231, 242)',
     'stroke-width': '0',
     'fill': 'rgb(231, 231, 242)',
