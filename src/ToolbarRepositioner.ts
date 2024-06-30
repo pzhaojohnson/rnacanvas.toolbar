@@ -21,9 +21,9 @@ export function ToolbarRepositioner() {
 
   trianglePath.attr({
     'd': 'M 12 10 L 21 15 L 12 20 z',
-    'stroke': 'rgb(231, 231, 242)',
+    'stroke': 'white',
     'stroke-width': '0',
-    'fill': 'rgb(231, 231, 242)',
+    'fill': 'white',
   });
 
   triangle.addTo(toolbarRepositioner);

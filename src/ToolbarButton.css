@@ -1,15 +1,15 @@
 .toolbarButton {
   padding: 6px 17px;
 
-  background-color: rgb(10, 10, 10);
+  background-color: black;
 
   font-family: "Open Sans", sans-serif;
   font-size: 11px;
   font-weight: 400;
   font-style: normal;
-  color: rgb(235, 235, 245);
+  color: white;
 
-  border: 1px solid rgb(233, 233, 244);
+  border: none;
   border-radius: 3px;
 
   outline: none;
@@ -18,9 +18,9 @@
 }
 
 .toolbarButton:hover {
-  background-color: rgb(49, 49, 52);
+  background-color: rgb(50, 50, 55);
 }
 
 .toolbarButton:active {
-  background-color: rgb(68, 68, 73);
+  background-color: rgb(65, 65, 71);
 }

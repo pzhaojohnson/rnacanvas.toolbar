@@ -3,15 +3,13 @@
   left: 60px;
   bottom: 15px;
 
-  width: 130px;
   height: 45px;
+  padding: 0px 20px 0px 15px;
 
-  background-color: rgb(12, 12, 13);
+  background-color: black;
 
-  border-radius: 5px;
+  border-radius: 4px;
   box-shadow: 0 0 12px #1a1a1c3b;
-
-  padding: 0px 15px;
 
   display: flex;
   flex-direction: row;
