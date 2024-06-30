@@ -11,22 +11,22 @@ export function ToolbarRepositioner() {
 
   toolbarRepositioner.classList.add(styles.toolbarRepositioner);
 
-  let caret = new SVG.Svg();
+  let triangle = new SVG.Svg();
 
-  caret.attr({ width: '32', height: '32' });
+  triangle.attr({ width: '32', height: '32' });
 
-  caret.viewbox(0, 0, 32, 32);
+  triangle.viewbox(0, 0, 32, 32);
 
-  let caretPath = caret.path();
+  let trianglePath = triangle.path();
 
-  caretPath.attr({
+  trianglePath.attr({
     'd': 'M 13 11 L 22 16 L 13 21 z',
     'stroke': 'rgb(231, 231, 242)',
     'stroke-width': '0',
     'fill': 'rgb(231, 231, 242)',
   });
 
-  caret.addTo(toolbarRepositioner);
+  triangle.addTo(toolbarRepositioner);
 
   return toolbarRepositioner;
 }
