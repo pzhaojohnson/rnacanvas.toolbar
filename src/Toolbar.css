@@ -4,7 +4,7 @@
   bottom: 15px;
 
   height: 45px;
-  padding: 0px 20px 0px 15px;
+  padding: 0px 17px 0px 15px;
 
   background-color: black;
 
@@ -14,5 +14,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 25px;
+  gap: 17px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
 }

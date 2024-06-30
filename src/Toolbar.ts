@@ -7,7 +7,12 @@ import { ToolbarButton } from './ToolbarButton';
 import { DragTranslater } from '@rnacanvas/forms';
 
 type Props = {
-  editLayout: () => void;
+  layoutButton: {
+    onClick: () => void;
+  }
+  exportButton: {
+    onClick: () => void;
+  }
 };
 
 /**
@@ -28,9 +33,17 @@ export class Toolbar {
 
     this.domNode.appendChild(GrabHatch());
 
+    let buttonsContainer = document.createElement('div');
+    buttonsContainer.classList.add(styles['buttons-container']);
+    this.domNode.append(buttonsContainer);
+
     let layoutButton = ToolbarButton('Layout');
-    layoutButton.addEventListener('click', () => this.props.editLayout());
-    this.domNode.appendChild(layoutButton);
+    layoutButton.addEventListener('click', () => this.props.layoutButton.onClick());
+    buttonsContainer.append(layoutButton);
+
+    let exportButton = ToolbarButton('Export');
+    exportButton.addEventListener('click', () => this.props.exportButton.onClick());
+    buttonsContainer.append(exportButton);
 
     this.dragTranslater = new DragTranslater(this.domNode);
   }
