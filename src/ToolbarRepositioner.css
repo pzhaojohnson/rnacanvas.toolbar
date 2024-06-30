@@ -3,22 +3,38 @@
   left: 15px;
   bottom: 21px;
 
-  background-color: rgb(11, 11, 11);
+  border-radius: 1000px;
 
   display: flex;
 
-  border-radius: 1000px;
-  box-shadow: 0 0 12px #23232536;
+  background-color: transparent;
+  position: relative;
+  isolation: isolate;
 
   cursor: pointer;
 }
 
-.toolbarRepositioner:hover {
+.toolbarRepositioner::before {
+  content: "";
+
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  background-color: rgb(11, 11, 11);
+  box-shadow: 0 0 12px #23232536;
+
+  z-index: -1;
+}
+
+.toolbarRepositioner:hover::before {
   transform: scale(1.1);
   transition: transform 0.1s;
 }
 
-.toolbarRepositioner:active {
+.toolbarRepositioner:active::before {
   transform: scale(1);
   transition: transform 0s;
 }
