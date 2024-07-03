@@ -18,9 +18,9 @@
 }
 
 .toolbarButton:hover {
-  background-color: rgb(50, 50, 55);
+  background-color: rgb(50, 50, 56);
 }
 
 .toolbarButton:active {
-  background-color: rgb(65, 65, 71);
+  background-color: rgb(66, 66, 73);
 }

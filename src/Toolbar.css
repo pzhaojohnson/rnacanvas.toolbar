@@ -9,17 +9,17 @@
   background-color: black;
 
   border-radius: 4px;
-  box-shadow: 0 0 12px #1a1a1c3b;
+  box-shadow: 0 0 12px #1a1a1c36;
 
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 17px;
+  gap: 18px;
 }
 
 .buttons-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
 }
