@@ -11,22 +11,24 @@ export function ToolbarRepositioner() {
 
   toolbarRepositioner.classList.add(styles.toolbarRepositioner);
 
-  let triangle = new SVG.Svg();
+  let svg = new SVG.Svg();
 
-  triangle.attr({ width: '30', height: '30' });
+  svg.attr({ width: '30', height: '30' });
 
-  triangle.viewbox(0, 0, 30, 30);
+  svg.viewbox(0, 0, 30, 30);
 
-  let trianglePath = triangle.path();
+  let whiteCircle = svg.circle();
 
-  trianglePath.attr({
-    'd': 'M 12 10 L 21 15 L 12 20 z',
+  whiteCircle.attr({
+    'r': '4',
+    'cx': '15',
+    'cy': '15',
     'stroke': 'white',
     'stroke-width': '0',
     'fill': 'white',
   });
 
-  triangle.addTo(toolbarRepositioner);
+  svg.addTo(toolbarRepositioner);
 
   return toolbarRepositioner;
 }
