@@ -47,6 +47,10 @@ export class Toolbar {
 
     this.dragTranslater = new DragTranslater(this.domNode);
     this.dragTranslater.interactionDepth = 'deep';
+
+    // allows the toolbar to be dragged when context-clicking buttons
+    // (without opening a context menu or activating buttons)
+    this.domNode.oncontextmenu = () => false;
   }
 
   /**
