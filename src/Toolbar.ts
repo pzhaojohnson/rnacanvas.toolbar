@@ -46,6 +46,7 @@ export class Toolbar {
     buttonsContainer.append(exportButton);
 
     this.dragTranslater = new DragTranslater(this.domNode);
+    this.dragTranslater.interactionDepth = 'deep';
   }
 
   /**
