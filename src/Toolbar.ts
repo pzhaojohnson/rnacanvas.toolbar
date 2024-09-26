@@ -33,17 +33,15 @@ export class Toolbar {
 
     this.domNode.appendChild(GrabEtching());
 
-    let buttonsContainer = document.createElement('div');
-    buttonsContainer.classList.add(styles['buttons-container']);
-    this.domNode.append(buttonsContainer);
-
     let layoutButton = ToolbarButton('Layout');
     layoutButton.addEventListener('click', () => this.props.layoutButton.onClick());
-    buttonsContainer.append(layoutButton);
+    layoutButton.style.marginLeft = '14px';
+    this.domNode.append(layoutButton);
 
     let exportButton = ToolbarButton('Export');
     exportButton.addEventListener('click', () => this.props.exportButton.onClick());
-    buttonsContainer.append(exportButton);
+    exportButton.style.marginLeft = '10px';
+    this.domNode.append(exportButton);
 
     this.dragTranslater = new DragTranslater(this.domNode);
     this.dragTranslater.interactionDepth = 'deep';
