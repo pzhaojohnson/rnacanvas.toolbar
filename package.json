@@ -1,6 +1,6 @@
 {
   "name": "@rnacanvas/toolbar",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "The RNAcanvas toolbar",
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@rnacanvas/forms": "^2.0.0",
+    "@rnacanvas/utilities": "^2.1.0",
     "@svgdotjs/svg.js": "^3.2.4",
     "jquery": "^3.7.1"
   }

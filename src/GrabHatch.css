@@ -1,13 +1,92 @@
+.grabHatch {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  pointer-events: auto;
+
+  cursor: grab;
+}
+
+.grabHatch:hover .tooltip {
+  display: block;
+}
+
+.grabHatch:active {
+  cursor: grabbing;
+}
+
 .line {
   width: 11px;
   height: 1px;
   background-color: white;
 }
 
-.grabHatch {
+.tooltip {
+  position: absolute;
+
+  width: 307px;
+  height: 66px;
+
+  background-color: black;
+
+  top: -97px;
+  left: -34px;
+
+  border-radius: 6px;
+
+  padding: 0px 0px 0px 18px;
+
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  justify-content: center;
+  gap: 7px;
+
+  box-shadow: 0px 0px 6px #dadae74d;
+
+  animation: tooltip-fade-in 1s;
+
+  display: none;
+}
+
+@keyframes tooltip-fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.tooltip:before {
+  content: "";
+  position: absolute;
+
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+  border-width: 18px 10px;
+
+  top: 100%;
+  left: 30px;
+}
+
+.tooltip-text {
+  margin: 0px;
+  padding: 0px;
+
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  font-style: normal;
+  color: white;
+
+  user-select: none;
+  -webkit-user-select: none;
 
   pointer-events: none;
 }
