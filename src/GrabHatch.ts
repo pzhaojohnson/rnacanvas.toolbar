@@ -41,15 +41,14 @@ function Tooltip() {
   textContainer.classList.add(styles['tooltip-text-container']);
   tooltip.append(textContainer);
 
-  let firstLine = document.createElement('p');
-  firstLine.classList.add(styles['tooltip-text']);
-  firstLine.textContent = 'Anywhere along the toolbar can be dragged.';
-  textContainer.append(firstLine);
+  let firstSentence = 'Anywhere along the toolbar can be dragged.';
 
-  let secondLine = document.createElement('p');
-  secondLine.classList.add(styles['tooltip-text']);
-  secondLine.textContent = `${contextClick} while dragging to avoid pressing buttons.`;
-  textContainer.append(secondLine);
+  let secondSentence = `${contextClick} while dragging to avoid pressing buttons.`;
+
+  let text = document.createElement('p');
+  text.classList.add(styles['tooltip-text']);
+  text.textContent = `${firstSentence} ${secondSentence}`;
+  textContainer.append(text);
 
   return tooltip;
 }

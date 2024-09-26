@@ -27,22 +27,17 @@
 .tooltip {
   position: absolute;
 
-  width: 308px;
-  height: 63px;
+  width: 532px;
+  height: 49px;
 
   background-color: black;
 
-  top: -98px;
-  left: -32px;
+  top: -83px;
+  left: -41px;
 
   border-radius: 6px;
 
-  padding: 0px 0px 0px 18px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 7px;
+  padding: 0px 0px 0px 19px;
 
   box-shadow: 0px 0px 6px #d9d9e724;
 
@@ -72,7 +67,7 @@
   border-width: 18px 9px;
 
   top: 100%;
-  left: 30px;
+  left: 39px;
 }
 
 .tooltip-text-container {
