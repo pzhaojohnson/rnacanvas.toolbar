@@ -35,18 +35,21 @@ let contextClick = detectMac() ? 'Ctrl-Click' : 'Right-click'
 
 function Tooltip() {
   let tooltip = document.createElement('div');
-
   tooltip.classList.add(styles['tooltip']);
+
+  let textContainer = document.createElement('div');
+  textContainer.classList.add(styles['tooltip-text-container']);
+  tooltip.append(textContainer);
 
   let firstLine = document.createElement('p');
   firstLine.classList.add(styles['tooltip-text']);
   firstLine.textContent = 'Anywhere along the toolbar can be dragged.';
-  tooltip.append(firstLine);
+  textContainer.append(firstLine);
 
   let secondLine = document.createElement('p');
   secondLine.classList.add(styles['tooltip-text']);
   secondLine.textContent = `${contextClick} while dragging to avoid pressing buttons.`;
-  tooltip.append(secondLine);
+  textContainer.append(secondLine);
 
   return tooltip;
 }
