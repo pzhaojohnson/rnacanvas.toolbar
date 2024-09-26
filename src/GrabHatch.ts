@@ -31,7 +31,7 @@ function Line() {
   return line;
 }
 
-let contextClick = detectMac() ? 'Ctrl-Click' : 'Right-click'
+let secondaryClick = detectMac() ? 'Control-click' : 'Right-click'
 
 function Tooltip() {
   let tooltip = document.createElement('div');
@@ -43,7 +43,7 @@ function Tooltip() {
 
   let firstSentence = 'Anywhere along the toolbar can be dragged.';
 
-  let secondSentence = `${contextClick} while dragging to avoid pressing buttons.`;
+  let secondSentence = `${secondaryClick} when dragging to avoid pressing buttons.`;
 
   let text = document.createElement('p');
   text.classList.add(styles['tooltip-text']);

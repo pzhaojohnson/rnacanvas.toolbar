@@ -27,17 +27,17 @@
 .tooltip {
   position: absolute;
 
-  width: 532px;
-  height: 49px;
+  width: 548px;
+  height: 48px;
 
   background-color: black;
 
-  top: -83px;
+  top: -82px;
   left: -41px;
 
   border-radius: 6px;
 
-  padding: 0px 0px 0px 19px;
+  padding: 0px 0px 0px 20px;
 
   box-shadow: 0px 0px 6px #d9d9e724;
 
