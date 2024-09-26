@@ -1,6 +1,6 @@
 import * as styles from './Toolbar.css';
 
-import { GrabHatch } from './GrabHatch';
+import { GrabEtching } from './GrabEtching';
 
 import { ToolbarButton } from './ToolbarButton';
 
@@ -31,7 +31,7 @@ export class Toolbar {
   constructor(private props: Props) {
     this.domNode.classList.add(styles.toolbar);
 
-    this.domNode.appendChild(GrabHatch());
+    this.domNode.appendChild(GrabEtching());
 
     let buttonsContainer = document.createElement('div');
     buttonsContainer.classList.add(styles['buttons-container']);

@@ -1,13 +1,13 @@
-import * as styles from './GrabHatch.css';
+import * as styles from './GrabEtching.css';
 
 import { detectMac } from '@rnacanvas/utilities';
 
-export function GrabHatch() {
-  let grabHatch = document.createElement('div');
+export function GrabEtching() {
+  let grabEtching = document.createElement('div');
 
-  grabHatch.classList.add(styles.grabHatch);
+  grabEtching.classList.add(styles['grab-etching']);
 
-  grabHatch.append(
+  grabEtching.append(
     Line(),
     Line(),
     Line(),
@@ -18,9 +18,9 @@ export function GrabHatch() {
     Line(),
   );
 
-  grabHatch.append(Tooltip());
+  grabEtching.append(Tooltip());
 
-  return grabHatch;
+  return grabEtching;
 }
 
 function Line() {

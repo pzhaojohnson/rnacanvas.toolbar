@@ -1,4 +1,4 @@
-.grabHatch {
+.grab-etching {
   position: relative;
 
   display: flex;
@@ -10,11 +10,11 @@
   cursor: grab;
 }
 
-.grabHatch:hover .tooltip {
+.grab-etching:hover .tooltip {
   display: block;
 }
 
-.grabHatch:active {
+.grab-etching:active {
   cursor: grabbing;
 }
 
