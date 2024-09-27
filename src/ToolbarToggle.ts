@@ -1,15 +1,15 @@
 import * as SVG from '@svgdotjs/svg.js';
 
-import * as styles from './ToolbarRepositioner.css';
+import * as styles from './ToolbarToggle.css';
 
 /**
  * Can be used as a button to bring the RNAcanvas toolbar
  * back to its original position (before any mouse dragging).
  */
-export function ToolbarRepositioner() {
-  let toolbarRepositioner = document.createElement('div');
+export function ToolbarToggle() {
+  let toolbarToggle = document.createElement('div');
 
-  toolbarRepositioner.classList.add(styles.toolbarRepositioner);
+  toolbarToggle.classList.add(styles['toolbar-toggle']);
 
   let svg = new SVG.Svg();
 
@@ -28,7 +28,7 @@ export function ToolbarRepositioner() {
     'fill': 'white',
   });
 
-  svg.addTo(toolbarRepositioner);
+  svg.addTo(toolbarToggle);
 
-  return toolbarRepositioner;
+  return toolbarToggle;
 }

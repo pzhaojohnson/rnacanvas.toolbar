@@ -1,4 +1,4 @@
-.toolbarRepositioner {
+.toolbar-toggle {
   position: absolute;
   left: 15px;
   bottom: 22.5px;
@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.toolbarRepositioner::before {
+.toolbar-toggle::before {
   content: "";
 
   position: absolute;
@@ -29,12 +29,12 @@
   z-index: -1;
 }
 
-.toolbarRepositioner:hover::before {
+.toolbar-toggle:hover::before {
   transform: scale(1.166);
   transition: transform 0.1s;
 }
 
-.toolbarRepositioner:active::before {
+.toolbar-toggle:active::before {
   transform: scale(1);
   transition: transform 0s;
 }

@@ -1,5 +1,5 @@
 import { Toolbar } from './Toolbar';
 export { Toolbar };
 
-import { ToolbarRepositioner } from './ToolbarRepositioner';
-export { ToolbarRepositioner };
+import { ToolbarToggle } from './ToolbarToggle';
+export { ToolbarToggle };
