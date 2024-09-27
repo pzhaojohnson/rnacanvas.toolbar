@@ -1,34 +1,73 @@
-import * as SVG from '@svgdotjs/svg.js';
+import type { Toolbar } from './Toolbar';
 
 import * as styles from './ToolbarToggle.css';
 
+import * as SVG from '@svgdotjs/svg.js';
+
 /**
- * Can be used as a button to bring the RNAcanvas toolbar
- * back to its original position (before any mouse dragging).
+ * A button to reposition the toolbar of the target app, for instance.
  */
-export function ToolbarToggle() {
-  let toolbarToggle = document.createElement('div');
+export class ToolbarToggle {
+  /**
+   * The DOM node corresponding to the toolbar toggle.
+   */
+  #domNode = document.createElement('div');
 
-  toolbarToggle.classList.add(styles['toolbar-toggle']);
+  #targetApp: App;
 
-  let svg = new SVG.Svg();
+  constructor(targetApp: App) {
+    this.#targetApp = targetApp;
 
-  svg.attr({ width: '30', height: '30' });
+    this.#domNode.classList.add(styles['toolbar-toggle']);
 
-  svg.viewbox(0, 0, 30, 30);
+    let svg = new SVG.Svg();
 
-  let whiteCircle = svg.circle();
+    svg.attr({ width: '30', height: '30' });
 
-  whiteCircle.attr({
-    'r': '4',
-    'cx': '15',
-    'cy': '15',
-    'stroke': 'white',
-    'stroke-width': '0',
-    'fill': 'white',
-  });
+    svg.viewbox(0, 0, 30, 30);
 
-  svg.addTo(toolbarToggle);
+    let whiteCircle = svg.circle();
 
-  return toolbarToggle;
+    whiteCircle.attr({
+      'r': '4',
+      'cx': '15',
+      'cy': '15',
+      'stroke': 'white',
+      'stroke-width': '0',
+      'fill': 'white',
+    });
+
+    svg.addTo(this.#domNode);
+
+    this.#domNode.addEventListener('click', () => this.press());
+  }
+
+  /**
+   * Appends the DOM node corresponding to the toolbar toggle
+   * to the provided container node.
+   */
+  appendTo(container: Node): void {
+    container.appendChild(this.#domNode);
+  }
+
+  /**
+   * Removes the DOM node corresponding to the toolbar toggle
+   * from any parent container node that it is in.
+   *
+   * Has no effect if the toolbar toggle had no parent container node to begin with.
+   */
+  remove(): void {
+    this.#domNode.remove();
+  }
+
+  press(): void {
+    this.#targetApp.toolbar.reposition();
+  }
+}
+
+/**
+ * The app interface used by toolbar toggles.
+ */
+interface App {
+  readonly toolbar: Toolbar;
 }
