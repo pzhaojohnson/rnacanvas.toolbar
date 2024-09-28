@@ -1,8 +1,4 @@
 .toolbar-toggle {
-  position: absolute;
-  left: 15px;
-  bottom: 22.5px;
-
   border-radius: 1000px;
 
   display: flex;
