@@ -11,14 +11,14 @@ export class ToolbarToggle {
   /**
    * The DOM node corresponding to the toolbar toggle.
    */
-  #domNode = document.createElement('div');
+  readonly domNode = document.createElement('div');
 
   #targetApp: App;
 
   constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
-    this.#domNode.classList.add(styles['toolbar-toggle']);
+    this.domNode.classList.add(styles['toolbar-toggle']);
 
     let svg = new SVG.Svg();
 
@@ -37,9 +37,9 @@ export class ToolbarToggle {
       'fill': 'white',
     });
 
-    svg.addTo(this.#domNode);
+    svg.addTo(this.domNode);
 
-    this.#domNode.addEventListener('click', () => this.press());
+    this.domNode.addEventListener('click', () => this.press());
   }
 
   /**
@@ -47,7 +47,7 @@ export class ToolbarToggle {
    * to the provided container node.
    */
   appendTo(container: Node): void {
-    container.appendChild(this.#domNode);
+    container.appendChild(this.domNode);
   }
 
   /**
@@ -57,7 +57,7 @@ export class ToolbarToggle {
    * Has no effect if the toolbar toggle had no parent container node to begin with.
    */
   remove(): void {
-    this.#domNode.remove();
+    this.domNode.remove();
   }
 
   press(): void {
