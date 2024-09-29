@@ -45,6 +45,14 @@ export class ToolbarToggle {
   press(): void {
     this.#targetApp.toolbar.reposition();
   }
+
+  hide(): void {
+    this.domNode.style.visibility = 'hidden';
+  }
+
+  unhide(): void {
+    this.domNode.style.visibility = 'visible';
+  }
 }
 
 /**
