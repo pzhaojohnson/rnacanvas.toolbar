@@ -73,4 +73,16 @@ export class Toolbar {
   reposition(): void {
     this.dragTranslater.untranslate();
   }
+
+  hide(): void {
+    this.domNode.style.visibility = 'hidden';
+  }
+
+  unhide(): void {
+    this.domNode.style.visibility = 'visible';
+  }
+
+  isHidden(): boolean {
+    return this.domNode.style.visibility != 'visible';
+  }
 }
