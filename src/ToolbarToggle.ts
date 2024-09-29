@@ -53,6 +53,10 @@ export class ToolbarToggle {
   unhide(): void {
     this.domNode.style.visibility = 'visible';
   }
+
+  isHidden(): boolean {
+    return this.domNode.style.visibility != 'visible';
+  }
 }
 
 /**
