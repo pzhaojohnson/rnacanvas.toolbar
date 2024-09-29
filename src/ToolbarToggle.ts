@@ -5,7 +5,7 @@ import * as styles from './ToolbarToggle.css';
 import * as SVG from '@svgdotjs/svg.js';
 
 /**
- * A button to reposition the toolbar of the target app, for instance.
+ * A button to reposition and hide/unhide the toolbar of a target RNAcanvas app.
  */
 export class ToolbarToggle {
   /**
@@ -43,7 +43,13 @@ export class ToolbarToggle {
   }
 
   press(): void {
-    this.#targetApp.toolbar.reposition();
+    if (this.#targetApp.toolbar.isHidden()) {
+      this.#targetApp.toolbar.unhide();
+    } else if (this.#targetApp.toolbar.displacementMagnitude == 0) {
+      this.#targetApp.toolbar.hide();
+    } else {
+      this.#targetApp.toolbar.reposition();
+    }
   }
 
   hide(): void {
