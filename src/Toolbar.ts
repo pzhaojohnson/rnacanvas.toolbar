@@ -6,6 +6,8 @@ import { ToolbarButton } from './ToolbarButton';
 
 import { DragTranslater } from '@rnacanvas/forms';
 
+import { Vector } from '@rnacanvas/vectors.oopified';
+
 type Props = {
   layoutButton: {
     onClick: () => void;
@@ -72,6 +74,16 @@ export class Toolbar {
    */
   reposition(): void {
     this.dragTranslater.untranslate();
+  }
+
+  /**
+   * The magnitude of the toolbar's displacement from its original position
+   * (before any dragging with the mouse).
+   */
+  get displacementMagnitude(): number {
+    let displacement = Vector.matching(this.dragTranslater.currentTranslation);
+
+    return displacement.magnitude;
   }
 
   hide(): void {
