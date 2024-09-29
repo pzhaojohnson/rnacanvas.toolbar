@@ -10,13 +10,6 @@ import * as SVG from '@svgdotjs/svg.js';
 export class ToolbarToggle {
   /**
    * The DOM node corresponding to the toolbar toggle.
-   *
-   * Can be moved around within the DOM tree of the document body,
-   * though its internal contents are not meant to be directly edited by outside code.
-   *
-   * CSS styles that do not affect the "inside" of the DOM node
-   * (e.g., that are related to the positioning of the whole DOM node)
-   * can be directly edited by outside code.
    */
   readonly domNode = document.createElement('div');
 
