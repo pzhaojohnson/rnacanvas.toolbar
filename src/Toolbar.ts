@@ -95,6 +95,9 @@ export class Toolbar {
   }
 
   isHidden(): boolean {
-    return this.domNode.style.visibility != 'visible';
+    return (
+      this.domNode.style.visibility != 'visible'
+      && this.domNode.style.visibility.trim() != ''
+    );
   }
 }
