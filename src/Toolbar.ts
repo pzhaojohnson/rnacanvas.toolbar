@@ -69,13 +69,14 @@ export class Toolbar<Form> {
   }
 
   /**
-   * The magnitude of the toolbar's displacement from its original position
+   * The displacement of the toolbar from its original position
    * (before any dragging with the mouse).
+   *
+   * Note that currently the values of the returned vector cannot be set
+   * to control the displacement of the toolbar.
    */
-  get displacementMagnitude(): number {
-    let displacement = Vector.matching(this.dragTranslater.currentTranslation);
-
-    return displacement.magnitude;
+  get displacement() {
+    return Vector.matching(this.dragTranslater.currentTranslation);
   }
 
   hide(): void {

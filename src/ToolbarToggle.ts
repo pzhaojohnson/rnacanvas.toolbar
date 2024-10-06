@@ -42,7 +42,7 @@ export class ToolbarToggle<Form> {
   press(): void {
     if (this.#targetApp.toolbar.isHidden()) {
       this.#targetApp.toolbar.unhide();
-    } else if (this.#targetApp.toolbar.displacementMagnitude == 0) {
+    } else if (this.#targetApp.toolbar.displacement.magnitude == 0) {
       this.#targetApp.toolbar.hide();
     } else {
       this.#targetApp.toolbar.reposition();
