@@ -4,28 +4,35 @@ import { GrabEtching } from './GrabEtching';
 
 import { ToolbarButton } from './ToolbarButton';
 
+import { SelectInterveningButton } from './SelectInterveningButton';
+
+import type { App } from './App';
+
 import { DragTranslater } from '@rnacanvas/forms';
 
 import { Vector } from '@rnacanvas/vectors.oopified';
 
-import type { App } from './App';
-
 /**
  * The toolbar for the RNAcanvas app.
  */
-export class Toolbar<Form> {
+export class Toolbar<B, F> {
   private readonly domNode = document.createElement('div');
+
+  #targetApp: App<B, F>;
+
+  #selectInterveningButton: SelectInterveningButton<B, F>;
 
   private readonly dragTranslater: DragTranslater;
 
-  #targetApp: App<Form>;
-
-  constructor(targetApp: App<Form>) {
+  constructor(targetApp: App<B, F>) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles.toolbar);
 
     this.domNode.appendChild(GrabEtching());
+
+    this.#selectInterveningButton = new SelectInterveningButton(targetApp);
+    this.domNode.append(this.#selectInterveningButton.domNode);
 
     let layoutButton = ToolbarButton('Layout');
     layoutButton.addEventListener('click', () => targetApp.openForm(targetApp.forms['layout']));

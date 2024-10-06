@@ -7,12 +7,12 @@ import type { App } from './App';
 /**
  * A button to reposition and hide/unhide the toolbar.
  */
-export class ToolbarToggle<Form> {
+export class ToolbarToggle<B, F> {
   readonly domNode = document.createElement('div');
 
-  #targetApp: App<Form>;
+  #targetApp: App<B, F>;
 
-  constructor(targetApp: App<Form>) {
+  constructor(targetApp: App<B, F>) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles['toolbar-toggle']);

@@ -1,11 +1,11 @@
 import * as styles from './ToolbarButton.css';
 
-export function ToolbarButton(name: string) {
+export function ToolbarButton(content: string | SVGSVGElement) {
   let toolbarButton = document.createElement('button');
 
   toolbarButton.classList.add(styles.toolbarButton);
 
-  toolbarButton.append(name);
+  toolbarButton.append(content);
 
   return toolbarButton;
 }
