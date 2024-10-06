@@ -32,9 +32,4 @@ export interface App<B, F> {
     'layout': F;
     'export': F;
   };
-
-  /**
-   * The toolbar of the app.
-   */
-  toolbar: Toolbar<B, F>;
 }

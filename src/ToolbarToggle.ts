@@ -2,7 +2,7 @@ import * as styles from './ToolbarToggle.css';
 
 import * as SVG from '@svgdotjs/svg.js';
 
-import type { App } from './App';
+import type { Toolbar } from './Toolbar';
 
 /**
  * A button to reposition and hide/unhide the toolbar.
@@ -61,4 +61,11 @@ export class ToolbarToggle<B, F> {
     // keep in mind that an invalid visibility style value results in a visible element
     return ['hidden', 'collapse'].includes(this.domNode.style.visibility);
   }
+}
+
+interface App<B, F> {
+  /**
+   * The toolbar of the app.
+   */
+  readonly toolbar: Toolbar<B, F>;
 }
