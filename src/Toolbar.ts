@@ -8,40 +8,32 @@ import { DragTranslater } from '@rnacanvas/forms';
 
 import { Vector } from '@rnacanvas/vectors.oopified';
 
-type Props = {
-  layoutButton: {
-    onClick: () => void;
-  }
-  exportButton: {
-    onClick: () => void;
-  }
-};
+import type { App } from './App';
 
 /**
- * The RNAcanvas toolbar.
- *
- * Can be dragged around with the mouse.
+ * The toolbar for the RNAcanvas app.
  */
-export class Toolbar {
-  /**
-   * The actual DOM node corresponding to the toolbar.
-   */
+export class Toolbar<Form> {
   private readonly domNode = document.createElement('div');
 
   private readonly dragTranslater: DragTranslater;
 
-  constructor(private props: Props) {
+  #targetApp: App<Form>;
+
+  constructor(targetApp: App<Form>) {
+    this.#targetApp = targetApp;
+
     this.domNode.classList.add(styles.toolbar);
 
     this.domNode.appendChild(GrabEtching());
 
     let layoutButton = ToolbarButton('Layout');
-    layoutButton.addEventListener('click', () => this.props.layoutButton.onClick());
+    layoutButton.addEventListener('click', () => targetApp.openForm(targetApp.forms['layout']));
     layoutButton.style.marginLeft = '16px';
     this.domNode.append(layoutButton);
 
     let exportButton = ToolbarButton('Export');
-    exportButton.addEventListener('click', () => this.props.exportButton.onClick());
+    exportButton.addEventListener('click', () => targetApp.openForm(targetApp.forms['export']));
     exportButton.style.marginLeft = '10px';
     this.domNode.append(exportButton);
 

@@ -1,21 +1,18 @@
-import type { Toolbar } from './Toolbar';
-
 import * as styles from './ToolbarToggle.css';
 
 import * as SVG from '@svgdotjs/svg.js';
 
+import type { App } from './App';
+
 /**
- * A button to reposition and hide/unhide the toolbar of a target RNAcanvas app.
+ * A button to reposition and hide/unhide the toolbar.
  */
-export class ToolbarToggle {
-  /**
-   * The DOM node corresponding to the toolbar toggle.
-   */
+export class ToolbarToggle<Form> {
   readonly domNode = document.createElement('div');
 
-  #targetApp: App;
+  #targetApp: App<Form>;
 
-  constructor(targetApp: App) {
+  constructor(targetApp: App<Form>) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles['toolbar-toggle']);
@@ -66,11 +63,4 @@ export class ToolbarToggle {
       && this.domNode.style.visibility.trim() != ''
     );
   }
-}
-
-/**
- * The app interface used by toolbar toggles.
- */
-interface App {
-  readonly toolbar: Toolbar;
 }
