@@ -87,9 +87,7 @@ export class Toolbar<Form> {
   }
 
   isHidden(): boolean {
-    return (
-      this.domNode.style.visibility != 'visible'
-      && this.domNode.style.visibility.trim() != ''
-    );
+    // keep in mind that an invalid visibility style value results in a visible element
+    return ['hidden', 'collapse'].includes(this.domNode.style.visibility);
   }
 }
