@@ -1,5 +1,5 @@
 .select-intervening-button {
-  margin: 0px 0px 0px 16px;
+  margin: 0px 0px 0px 15px;
 
   position: relative;
 }
@@ -15,7 +15,7 @@
 .tooltip {
   position: absolute;
 
-  width: 625px;
+  width: 647px;
   height: 48px;
 
   background-color: black;

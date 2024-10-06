@@ -36,7 +36,7 @@ export class Toolbar<B, F> {
 
     let layoutButton = ToolbarButton('Layout');
     layoutButton.addEventListener('click', () => targetApp.openForm(targetApp.forms['layout']));
-    layoutButton.style.marginLeft = '16px';
+    layoutButton.style.marginLeft = '8px';
     this.domNode.append(layoutButton);
 
     let exportButton = ToolbarButton('Export');
