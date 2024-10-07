@@ -27,12 +27,11 @@
 .tooltip {
   position: absolute;
 
-  width: 548px;
-  height: 48px;
+  height: 47px;
 
   background-color: black;
 
-  top: -82px;
+  top: -81px;
   left: -41px;
 
   border-radius: 6px;
