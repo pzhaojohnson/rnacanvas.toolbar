@@ -4,12 +4,14 @@ import { ToolbarButton } from './ToolbarButton';
 
 import type { App } from './App';
 
+import type { Nucleobase } from '@rnacanvas/bases-layout';
+
 import { min, max } from '@rnacanvas/math';
 
-export class SelectInterveningButton<B, F> {
+export class SelectInterveningButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
-  #targetApp: App<B, F>;
+  #targetApp;
 
   constructor(targetApp: App<B, F>) {
     this.#targetApp = targetApp;

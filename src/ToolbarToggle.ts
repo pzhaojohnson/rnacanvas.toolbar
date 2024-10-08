@@ -4,10 +4,12 @@ import * as SVG from '@svgdotjs/svg.js';
 
 import type { Toolbar } from './Toolbar';
 
+import type { Nucleobase } from '@rnacanvas/bases-layout';
+
 /**
  * A button to reposition and hide/unhide the toolbar.
  */
-export class ToolbarToggle<B, F> {
+export class ToolbarToggle<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
   #targetApp: App<B, F>;
@@ -63,7 +65,7 @@ export class ToolbarToggle<B, F> {
   }
 }
 
-interface App<B, F> {
+interface App<B extends Nucleobase, F> {
   /**
    * The toolbar of the app.
    */

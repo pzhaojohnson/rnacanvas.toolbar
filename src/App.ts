@@ -1,9 +1,9 @@
-import type { Toolbar } from './Toolbar';
+import type { Nucleobase } from '@rnacanvas/bases-layout';
 
 /**
  * The app interface used by the toolbar.
  */
-export interface App<B, F> {
+export interface App<B extends Nucleobase, F> {
   readonly drawing: {
     /**
      * All bases in the drawing of the app.
@@ -12,6 +12,9 @@ export interface App<B, F> {
      * is the ordering of bases in the drawing of the app.
      */
     readonly bases: Iterable<B>;
+
+    readonly horizontalClientScaling: number;
+    readonly verticalClientScaling: number;
   };
 
   /**
@@ -25,6 +28,9 @@ export interface App<B, F> {
      */
     addAll(bases: Iterable<B>): void;
   };
+
+  beforeDragging(): void;
+  afterDragging(): void;
 
   openForm(form: F): void;
 

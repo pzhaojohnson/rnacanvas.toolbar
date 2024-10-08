@@ -8,6 +8,8 @@ import { SelectInterveningButton } from './SelectInterveningButton';
 
 import type { App } from './App';
 
+import type { Nucleobase } from '@rnacanvas/bases-layout';
+
 import { DragTranslater } from '@rnacanvas/forms';
 
 import { Vector } from '@rnacanvas/vectors.oopified';
@@ -15,7 +17,7 @@ import { Vector } from '@rnacanvas/vectors.oopified';
 /**
  * The toolbar for the RNAcanvas app.
  */
-export class Toolbar<B, F> {
+export class Toolbar<B extends Nucleobase, F> {
   private readonly domNode = document.createElement('div');
 
   #targetApp: App<B, F>;

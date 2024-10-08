@@ -1,6 +1,6 @@
 {
   "name": "@rnacanvas/toolbar",
-  "version": "9.0.4",
+  "version": "10.0.0",
   "description": "The toolbar for the RNAcanvas app",
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@rnacanvas/bases-layout": "^3.0.1",
     "@rnacanvas/forms": "^2.0.0",
     "@rnacanvas/math": "^1.17.0",
     "@rnacanvas/utilities": "^2.1.0",
