@@ -8,9 +8,11 @@ import { SelectInterveningButton } from './SelectInterveningButton';
 
 import { ShiftButton } from './ShiftButton';
 
+import { RotateButton } from './RotateButton';
+
 import type { App } from './App';
 
-import type { Nucleobase } from '@rnacanvas/bases-layout';
+import type { Nucleobase } from './Nucleobase';
 
 import { DragTranslater } from '@rnacanvas/forms';
 
@@ -28,6 +30,8 @@ export class Toolbar<B extends Nucleobase, F> {
 
   #shiftButton;
 
+  #rotateButton;
+
   private readonly dragTranslater: DragTranslater;
 
   constructor(targetApp: App<B, F>) {
@@ -42,6 +46,9 @@ export class Toolbar<B extends Nucleobase, F> {
 
     this.#shiftButton = new ShiftButton(targetApp);
     this.domNode.append(this.#shiftButton.domNode);
+
+    this.#rotateButton = new RotateButton(targetApp);
+    this.domNode.append(this.#rotateButton.domNode);
 
     let layoutButton = ToolbarButton('Layout');
     layoutButton.addEventListener('click', () => targetApp.openForm(targetApp.forms['layout']));

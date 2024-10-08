@@ -1,4 +1,4 @@
-import * as styles from './ShiftButton.css';
+import * as styles from './RotateButton.css';
 
 import { ToolbarButton } from './ToolbarButton';
 
@@ -6,35 +6,51 @@ import type { App } from './App';
 
 import type { Nucleobase } from './Nucleobase';
 
-import { shift } from '@rnacanvas/bases-layout';
-
 import { detectMac } from '@rnacanvas/utilities';
 
-export class ShiftButton<B extends Nucleobase, F> {
+import { midpoint } from '@rnacanvas/points';
+
+import { direction } from '@rnacanvas/points';
+
+import { rotate } from '@rnacanvas/bases-layout';
+
+export class RotateButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
   #targetApp;
 
   #isActive = false;
 
-  #shifted = false;
+  /**
+   * Whether or not bases have been rotated
+   * since the rotate button last became active.
+   */
+  #rotated = false;
 
   constructor(targetApp: App<B, F>) {
     this.#targetApp = targetApp;
 
-    this.domNode.classList.add(styles['shift-button']);
+    this.domNode.classList.add(styles['rotate-button']);
 
     let icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     icon.setAttribute('viewBox', '0 0 24 24');
     icon.setAttribute('width', '24');
     icon.setAttribute('height', '24');
 
-    let iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    iconPath.setAttribute('d', 'M 12 12 v 7 h -3 l 3 3 l 3 -3 h -3 v -7 v -7 h -3 l 3 -3 l 3 3 h -3 v 7 h -7 v 3 l -3 -3 l 3 -3 v 3 h 7 h 7 v -3 l 3 3 l -3 3 v -3 h -7 z');
-    iconPath.setAttribute('stroke', 'white');
-    iconPath.setAttribute('stroke-width', '1');
-    iconPath.setAttribute('fill', 'white');
-    icon.append(iconPath);
+    icon.innerHTML = `
+      <path
+        d="M 18 18 A 6 6 0 1 1 6, 6"
+        stroke="white" stroke-width="1" fill="none"
+      ></path>
+      <path
+        d="M 6 18 A 6 6 0 1 1 18, 6"
+        stroke="white"l stroke-width="1" fill="none"
+      ></path>
+      <path
+        d="M 18 6 l 3 -3 v 6 h -6 z"
+        stroke="white" stroke-width="1" fill="white"
+      ></path>
+    `;
 
     let button = ToolbarButton(icon);
     button.classList.add(styles['button']);
@@ -57,7 +73,7 @@ export class ShiftButton<B extends Nucleobase, F> {
     }
 
     this.#isActive = true;
-    this.#shifted = false;
+    this.#rotated = false;
   }
 
   #handleMouseMove(event: MouseEvent): void {
@@ -65,28 +81,41 @@ export class ShiftButton<B extends Nucleobase, F> {
       return;
     }
 
-    let horizontalClientScaling = this.#targetApp.drawing.horizontalClientScaling;
-    let verticalClientScaling = this.#targetApp.drawing.verticalClientScaling;
+    let allBases = [...this.#targetApp.drawing.bases];
 
-    if (!Number.isFinite(horizontalClientScaling)) { horizontalClientScaling = 1; }
-    if (!Number.isFinite(verticalClientScaling)) { verticalClientScaling = 1; }
+    let selectedBasesSet = new Set(this.#targetApp.selectedBases);
 
-    if (!this.#shifted) {
+    // retrieve in sequence order
+    let selectedBases = allBases.filter(b => selectedBasesSet.has(b));
+
+    if (selectedBases.length < 2) {
+      return;
+    }
+
+    let firstSelectedBase = selectedBases[0];
+    let lastSelectedBase = selectedBases[selectedBases.length - 1];
+
+    let pointOfRotation = midpoint(firstSelectedBase.clientCenterPoint, lastSelectedBase.clientCenterPoint);
+
+    let currentPoint = { x: event.clientX, y: event.clientY };
+    let previousPoint = { x: currentPoint.x - event.movementX, y: currentPoint.y - event.movementY };
+
+    let currentDirection = direction(pointOfRotation, currentPoint);
+    let previousDirection = direction(pointOfRotation, previousPoint);
+
+    if (!this.#rotated) {
       this.#targetApp.beforeDragging();
     }
 
-    shift([...this.#targetApp.selectedBases], {
-      x: event.movementX / horizontalClientScaling,
-      y: event.movementY / verticalClientScaling,
-    });
+    rotate(selectedBases, currentDirection - previousDirection);
 
-    this.#shifted = true;
+    this.#rotated = true;
   }
 
   #handleMouseUp(): void {
     this.#isActive = false;
 
-    if (this.#shifted) {
+    if (this.#rotated) {
       this.#targetApp.afterDragging();
     }
   }
@@ -95,7 +124,7 @@ export class ShiftButton<B extends Nucleobase, F> {
 function Tooltip() {
   let text = document.createElement('p');
   text.classList.add(styles['tooltip-text']);
-  text.textContent = 'Drag bases.';
+  text.textContent = 'Rotate bases.';
 
   let textContainer = document.createElement('div');
   textContainer.classList.add(styles['tooltip-text-container']);

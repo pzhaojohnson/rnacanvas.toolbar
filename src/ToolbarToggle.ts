@@ -4,7 +4,7 @@ import * as SVG from '@svgdotjs/svg.js';
 
 import type { Toolbar } from './Toolbar';
 
-import type { Nucleobase } from '@rnacanvas/bases-layout';
+import type { Nucleobase } from './Nucleobase';
 
 /**
  * A button to reposition and hide/unhide the toolbar.

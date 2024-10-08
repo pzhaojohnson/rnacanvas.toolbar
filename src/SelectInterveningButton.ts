@@ -4,7 +4,7 @@ import { ToolbarButton } from './ToolbarButton';
 
 import type { App } from './App';
 
-import type { Nucleobase } from '@rnacanvas/bases-layout';
+import type { Nucleobase } from './Nucleobase';
 
 import { min, max } from '@rnacanvas/math';
 

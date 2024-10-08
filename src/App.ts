@@ -1,4 +1,4 @@
-import type { Nucleobase } from '@rnacanvas/bases-layout';
+import type { Nucleobase } from './Nucleobase';
 
 /**
  * The app interface used by the toolbar.
