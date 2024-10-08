@@ -15,13 +15,13 @@
 .tooltip {
   position: absolute;
 
-  width: 647px;
+  width: 81px;
   height: 47px;
 
   background-color: black;
 
   top: -76px;
-  left: -30px;
+  left: -32px;
 
   border-radius: 6px;
 
@@ -55,7 +55,7 @@
   border-width: 18px 9px;
 
   top: 100%;
-  left: 39px;
+  left: 42px;
 }
 
 .tooltip-text-container {
