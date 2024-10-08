@@ -6,6 +6,8 @@ import { ToolbarButton } from './ToolbarButton';
 
 import { SelectInterveningButton } from './SelectInterveningButton';
 
+import { ShiftButton } from './ShiftButton';
+
 import type { App } from './App';
 
 import type { Nucleobase } from '@rnacanvas/bases-layout';
@@ -24,6 +26,8 @@ export class Toolbar<B extends Nucleobase, F> {
 
   #selectInterveningButton: SelectInterveningButton<B, F>;
 
+  #shiftButton;
+
   private readonly dragTranslater: DragTranslater;
 
   constructor(targetApp: App<B, F>) {
@@ -35,6 +39,9 @@ export class Toolbar<B extends Nucleobase, F> {
 
     this.#selectInterveningButton = new SelectInterveningButton(targetApp);
     this.domNode.append(this.#selectInterveningButton.domNode);
+
+    this.#shiftButton = new ShiftButton(targetApp);
+    this.domNode.append(this.#shiftButton.domNode);
 
     let layoutButton = ToolbarButton('Layout');
     layoutButton.addEventListener('click', () => targetApp.openForm(targetApp.forms['layout']));
