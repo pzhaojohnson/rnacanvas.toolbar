@@ -6,6 +6,9 @@
   background-color: transparent;
   isolation: isolate;
 
+  user-select: none;
+  -webkit-user-select: none;
+
   cursor: pointer;
 }
 

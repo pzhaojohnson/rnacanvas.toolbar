@@ -36,6 +36,8 @@ export class ToolbarToggle<B extends Nucleobase, F> {
       'fill': 'white',
     });
 
+    svg.attr('style', 'user-select: none; -webkit-user-select: none;');
+
     svg.addTo(this.domNode);
 
     this.domNode.addEventListener('click', () => this.press());

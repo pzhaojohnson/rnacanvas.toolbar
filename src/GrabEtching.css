@@ -7,6 +7,9 @@
 
   pointer-events: auto;
 
+  user-select: none;
+  -webkit-user-select: none;
+
   cursor: grab;
 }
 
@@ -22,6 +25,9 @@
   width: 11px;
   height: 1px;
   background-color: white;
+
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .tooltip {
