@@ -30,13 +30,13 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
     iconPath.setAttribute('fill', 'none');
     icon.append(iconPath);
 
-    let button = ToolbarButton(icon);
-    button.classList.add(styles['button']);
-    button.addEventListener('click', () => this.#handleClick());
-    this.domNode.append(button);
+    let button = new ToolbarButton(icon);
+    button.domNode.classList.add(styles['button']);
+    button.domNode.addEventListener('click', () => this.#handleClick());
+    this.domNode.append(button.domNode);
 
     this.domNode.append(Tooltip());
-    this.domNode.style.borderRadius = button.style.borderRadius;
+    this.domNode.style.borderRadius = button.domNode.style.borderRadius;
   }
 
   #handleClick() {

@@ -50,15 +50,15 @@ export class Toolbar<B extends Nucleobase, F> {
     this.#rotateButton = new RotateButton(targetApp);
     this.domNode.append(this.#rotateButton.domNode);
 
-    let layoutButton = ToolbarButton('Layout');
-    layoutButton.addEventListener('click', () => targetApp.openForm(targetApp.forms['layout']));
-    layoutButton.style.marginLeft = '8px';
-    this.domNode.append(layoutButton);
+    let layoutButton = new ToolbarButton('Layout');
+    layoutButton.domNode.addEventListener('click', () => targetApp.openForm(targetApp.forms['layout']));
+    layoutButton.domNode.style.marginLeft = '8px';
+    this.domNode.append(layoutButton.domNode);
 
-    let exportButton = ToolbarButton('Export');
-    exportButton.addEventListener('click', () => targetApp.openForm(targetApp.forms['export']));
-    exportButton.style.marginLeft = '2px';
-    this.domNode.append(exportButton);
+    let exportButton = new ToolbarButton('Export');
+    exportButton.domNode.addEventListener('click', () => targetApp.openForm(targetApp.forms['export']));
+    exportButton.domNode.style.marginLeft = '2px';
+    this.domNode.append(exportButton.domNode);
 
     this.dragTranslater = new DragTranslater(this.domNode);
     this.dragTranslater.interactionDepth = 'deep';

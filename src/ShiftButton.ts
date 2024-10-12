@@ -36,15 +36,15 @@ export class ShiftButton<B extends Nucleobase, F> {
     iconPath.setAttribute('fill', 'white');
     icon.append(iconPath);
 
-    let button = ToolbarButton(icon);
-    button.classList.add(styles['button']);
-    this.domNode.append(button);
+    let button = new ToolbarButton(icon);
+    button.domNode.classList.add(styles['button']);
+    this.domNode.append(button.domNode);
 
-    button.addEventListener('mousedown', event => this.#handleMouseDown(event));
+    button.domNode.addEventListener('mousedown', event => this.#handleMouseDown(event));
     window.addEventListener('mousemove', event => this.#handleMouseMove(event));
     window.addEventListener('mouseup', () => this.#handleMouseUp());
 
-    this.domNode.style.borderRadius = button.style.borderRadius;
+    this.domNode.style.borderRadius = button.domNode.style.borderRadius;
 
     this.domNode.append(Tooltip());
   }
