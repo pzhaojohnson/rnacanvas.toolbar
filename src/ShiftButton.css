@@ -1,5 +1,5 @@
 .shift-button {
-  margin: 0px 0px 0px 15px;
+  margin: 0px 0px 0px 12px;
 
   position: relative;
 }
@@ -15,17 +15,16 @@
 .tooltip {
   position: absolute;
 
-  width: 81px;
-  height: 47px;
+  height: 44px;
 
   background-color: black;
 
-  top: -76px;
+  top: -73px;
   left: -32px;
 
   border-radius: 6px;
 
-  padding: 0px 0px 0px 20px;
+  padding: 0px 20px 0px 20px;
 
   box-shadow: 0px 0px 6px #d9d9e724;
 
@@ -76,6 +75,8 @@
   font-weight: 600;
   font-style: normal;
   color: white;
+
+  text-wrap: nowrap;
 
   user-select: none;
   -webkit-user-select: none;

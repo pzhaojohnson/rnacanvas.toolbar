@@ -36,7 +36,6 @@ let secondaryClick = detectMac() ? 'Control-click' : 'Right-click'
 function Tooltip() {
   let tooltip = document.createElement('div');
   tooltip.classList.add(styles['tooltip']);
-  tooltip.style.width = detectMac() ? '548px' : '533px';
 
   let textContainer = document.createElement('div');
   textContainer.classList.add(styles['tooltip-text-container']);
