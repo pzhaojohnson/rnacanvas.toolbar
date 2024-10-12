@@ -86,19 +86,30 @@ export class RotateButton<B extends Nucleobase, F> {
     return this.#button.isDisabled();
   }
 
+  #updateTooltipText(): void {
+    let numSelectedBases = [...this.#targetApp.selectedBases].length;
+
+    if (numSelectedBases == 0) {
+      this.#tooltip.textContent = 'No bases are selected.';
+    } else if (numSelectedBases == 1) {
+      this.#tooltip.textContent = 'At least two bases must be selected.';
+    } else {
+      this.#tooltip.textContent = 'Rotate bases.';
+    }
+  }
+
   #refresh(): void {
     let numSelectedBases = [...this.#targetApp.selectedBases].length;
 
     if (numSelectedBases == 0) {
       this.#disable();
-      this.#tooltip.textContent = 'No bases are selected.';
     } else if (numSelectedBases == 1) {
       this.#disable();
-      this.#tooltip.textContent = 'At least two bases must be selected.';
     } else {
       this.#enable();
-      this.#tooltip.textContent = this.#tooltip.enabledTextContent;
     }
+
+    this.#updateTooltipText();
   }
 
   #handleMouseDown(event: MouseEvent): void {
@@ -166,12 +177,9 @@ class Tooltip {
 
   #p;
 
-  enabledTextContent = 'Rotate bases.';
-
   constructor() {
     this.#p = document.createElement('p');
     this.#p.classList.add(styles['tooltip-text']);
-    this.#p.textContent = this.enabledTextContent;
 
     let textContainer = document.createElement('div');
     textContainer.classList.add(styles['tooltip-text-container']);

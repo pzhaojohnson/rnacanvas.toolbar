@@ -67,6 +67,26 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
     return this.#button.isDisabled();
   }
 
+  #updateTooltipText(): void {
+    let allBases = [...this.#targetApp.drawing.bases];
+    let selectedBases = [...this.#targetApp.selectedBases];
+
+    let selectedBaseIndices = selectedBases.map(b => allBases.indexOf(b));
+
+    let minSelectedBaseIndex = min(selectedBaseIndices);
+    let maxSelectedBaseIndex = max(selectedBaseIndices);
+
+    if (selectedBases.length == 0) {
+      this.#tooltip.textContent = 'No bases are selected.';
+    } else if (selectedBases.length == 1) {
+      this.#tooltip.textContent = 'At least two bases must be selected.';
+    } else if (maxSelectedBaseIndex - minSelectedBaseIndex + 1 == selectedBases.length) {
+      this.#tooltip.textContent = 'There are no intervening bases to select.';
+    } else {
+      this.#tooltip.textContent = 'Select intervening bases between those already selected. The Shift key can also be held while dragging-to-select bases.';
+    }
+  }
+
   #refresh(): void {
     let allBases = [...this.#targetApp.drawing.bases];
     let selectedBases = [...this.#targetApp.selectedBases];
@@ -78,17 +98,15 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
 
     if (selectedBases.length == 0) {
       this.#disable();
-      this.#tooltip.textContent = 'No bases are selected.';
     } else if (selectedBases.length == 1) {
       this.#disable();
-      this.#tooltip.textContent = 'At least two bases must be selected.';
     } else if (maxSelectedBaseIndex - minSelectedBaseIndex + 1 == selectedBases.length) {
       this.#disable();
-      this.#tooltip.textContent = 'There are no intervening bases to select.';
     } else {
       this.#enable();
-      this.#tooltip.textContent = this.#tooltip.enabledTextContent;
     }
+
+    this.#updateTooltipText();
   }
 
   #handleClick() {
@@ -116,12 +134,9 @@ class Tooltip {
 
   #p;
 
-  enabledTextContent = 'Select intervening bases between those already selected. The Shift key can also be held while dragging-to-select bases.';
-
   constructor() {
     this.#p = document.createElement('p');
     this.#p.classList.add(styles['tooltip-text']);
-    this.#p.textContent = this.enabledTextContent;
 
     let textContainer = document.createElement('div');
     textContainer.classList.add(styles['tooltip-text-container']);
