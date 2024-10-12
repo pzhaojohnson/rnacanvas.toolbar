@@ -95,7 +95,7 @@ export class ShiftButton<B extends Nucleobase, F> {
 function Tooltip() {
   let text = document.createElement('p');
   text.classList.add(styles['tooltip-text']);
-  text.textContent = 'Drag bases.';
+  text.textContent = 'Shift bases.';
 
   let textContainer = document.createElement('div');
   textContainer.classList.add(styles['tooltip-text-container']);
