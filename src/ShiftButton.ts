@@ -76,6 +76,9 @@ export class ShiftButton<B extends Nucleobase, F> {
     if (numSelectedBases == 0) {
       this.#disable();
       this.#tooltip.textContent = 'No bases are selected.';
+    } else if (numSelectedBases == 1) {
+      this.#enable();
+      this.#tooltip.textContent = 'Shift base.';
     } else {
       this.#enable();
       this.#tooltip.textContent = this.#tooltip.enabledTextContent;
