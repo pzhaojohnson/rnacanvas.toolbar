@@ -6,17 +6,47 @@ export class ToolbarButton {
   readonly domNode = document.createElement('button');
 
   constructor(content: string | SVGSVGElement) {
-    this.domNode.classList.add(styles.toolbarButton);
+    this.domNode.classList.add(styles['toolbar-button'], styles['enabled']);
 
     this.domNode.append(content);
 
-    // prevent dragging of the toolbar when toolbar buttons are clicked normally
+    // prevent dragging of the toolbar when the toolbar button is enabled and primary clicked
     this.domNode.addEventListener('mousedown', event => {
-      if (detectMac()) {
-        event.button == 0 && !event.ctrlKey ? event.stopPropagation() : {};
-      } else {
-        event.button == 0 ? event.stopPropagation() : {};
+      if (this.isEnabled()) {
+        isPrimaryMouseDown(event) ? event.stopPropagation() : {};
       }
     });
+  }
+
+  disable(): void {
+    this.domNode.classList.remove(styles['enabled']);
+  }
+
+  enable(): void {
+    this.domNode.classList.add(styles['enabled']);
+  }
+
+  isDisabled(): boolean {
+    return !this.domNode.classList.contains(styles['enabled']);
+  }
+
+  isEnabled(): boolean {
+    return !this.isDisabled();
+  }
+}
+
+/**
+ * Returns true if and only if the mouse event
+ * is a mouse down event for a primary click sequence.
+ */
+function isPrimaryMouseDown(event: MouseEvent): boolean {
+  if (event.type != 'mousedown') {
+    return false;
+  }
+
+  if (detectMac()) {
+    return event.button == 0 && !event.ctrlKey;
+  } else {
+    return event.button == 0;
   }
 }

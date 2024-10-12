@@ -27,6 +27,12 @@ export interface App<B extends Nucleobase, F> {
      * Adds all of the specified bases to the set of currently selected bases.
      */
     addAll(bases: Iterable<B>): void;
+
+    /**
+     * The specified listener is to be called
+     * whenever the set of currently selected bases changes.
+     */
+    addEventListener(name: 'change', listener: () => void): void;
   };
 
   beforeDragging(): void;

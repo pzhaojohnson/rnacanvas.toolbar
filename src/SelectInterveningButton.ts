@@ -11,6 +11,10 @@ import { min, max } from '@rnacanvas/math';
 export class SelectInterveningButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
+  #button;
+
+  #tooltip;
+
   #targetApp;
 
   constructor(targetApp: App<B, F>) {
@@ -30,16 +34,68 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
     iconPath.setAttribute('fill', 'none');
     icon.append(iconPath);
 
-    let button = new ToolbarButton(icon);
-    button.domNode.classList.add(styles['button']);
-    button.domNode.addEventListener('click', () => this.#handleClick());
-    this.domNode.append(button.domNode);
+    this.#button = new ToolbarButton(icon);
+    this.#button.domNode.classList.add(styles['button'], styles['clickable']);
+    this.#button.domNode.addEventListener('click', () => this.#handleClick());
+    this.domNode.append(this.#button.domNode);
 
-    this.domNode.append(Tooltip());
-    this.domNode.style.borderRadius = button.domNode.style.borderRadius;
+    this.#tooltip = new Tooltip();
+    this.domNode.append(this.#tooltip.domNode);
+
+    this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
+
+    targetApp.selectedBases.addEventListener('change', () => this.#refresh());
+
+    this.#refresh();
+  }
+
+  #disable(): void {
+    this.#button.disable();
+
+    this.#button.domNode.classList.remove(styles['clickable']);
+    this.#button.domNode.classList.add(styles['draggable']);
+  }
+
+  #enable(): void {
+    this.#button.enable();
+
+    this.#button.domNode.classList.add(styles['clickable']);
+    this.#button.domNode.classList.remove(styles['draggable']);
+  }
+
+  isDisabled(): boolean {
+    return this.#button.isDisabled();
+  }
+
+  #refresh(): void {
+    let allBases = [...this.#targetApp.drawing.bases];
+    let selectedBases = [...this.#targetApp.selectedBases];
+
+    let selectedBaseIndices = selectedBases.map(b => allBases.indexOf(b));
+
+    let minSelectedBaseIndex = min(selectedBaseIndices);
+    let maxSelectedBaseIndex = max(selectedBaseIndices);
+
+    if (selectedBases.length == 0) {
+      this.#disable();
+      this.#tooltip.textContent = 'No bases are selected.';
+    } else if (selectedBases.length == 1) {
+      this.#disable();
+      this.#tooltip.textContent = 'At least two bases must be selected.';
+    } else if (maxSelectedBaseIndex - minSelectedBaseIndex + 1 == selectedBases.length) {
+      this.#disable();
+      this.#tooltip.textContent = 'There are no intervening bases to select.';
+    } else {
+      this.#enable();
+      this.#tooltip.textContent = this.#tooltip.enabledTextContent;
+    }
   }
 
   #handleClick() {
+    if (this.isDisabled()) {
+      return;
+    }
+
     let allBases = [...this.#targetApp.drawing.bases];
     let selectedBases = [...this.#targetApp.selectedBases];
 
@@ -55,20 +111,31 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
   }
 }
 
-function Tooltip() {
-  let firstSentence = 'Select intervening bases between those already selected.';
-  let secondSentence = 'The Shift key can also be held while dragging-to-select bases.';
+class Tooltip {
+  readonly domNode = document.createElement('div');
 
-  let text = document.createElement('p');
-  text.classList.add(styles['tooltip-text']);
-  text.textContent = `${firstSentence} ${secondSentence}`;
+  #p;
 
-  let textContainer = document.createElement('div');
-  textContainer.classList.add(styles['tooltip-text-container']);
-  textContainer.append(text);
+  enabledTextContent = 'Select intervening bases between those already selected. The Shift key can also be held while dragging-to-select bases.';
 
-  let tooltip = document.createElement('div');
-  tooltip.classList.add(styles['tooltip']);
-  tooltip.append(textContainer);
-  return tooltip;
+  constructor() {
+    this.#p = document.createElement('p');
+    this.#p.classList.add(styles['tooltip-text']);
+    this.#p.textContent = this.enabledTextContent;
+
+    let textContainer = document.createElement('div');
+    textContainer.classList.add(styles['tooltip-text-container']);
+    textContainer.append(this.#p);
+
+    this.domNode.classList.add(styles['tooltip']);
+    this.domNode.append(textContainer);
+  }
+
+  get textContent() {
+    return this.#p.textContent;
+  }
+
+  set textContent(textContent) {
+    this.#p.textContent = textContent;
+  }
 }

@@ -13,6 +13,10 @@ import { detectMac } from '@rnacanvas/utilities';
 export class ShiftButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
+  #button;
+
+  #tooltip;
+
   #targetApp;
 
   #isActive = false;
@@ -36,20 +40,53 @@ export class ShiftButton<B extends Nucleobase, F> {
     iconPath.setAttribute('fill', 'white');
     icon.append(iconPath);
 
-    let button = new ToolbarButton(icon);
-    button.domNode.classList.add(styles['button']);
-    this.domNode.append(button.domNode);
+    this.#button = new ToolbarButton(icon);
+    this.#button.domNode.classList.add(styles['button'], styles['draggable']);
+    this.domNode.append(this.#button.domNode);
 
-    button.domNode.addEventListener('mousedown', event => this.#handleMouseDown(event));
+    this.#button.domNode.addEventListener('mousedown', event => this.#handleMouseDown(event));
     window.addEventListener('mousemove', event => this.#handleMouseMove(event));
     window.addEventListener('mouseup', () => this.#handleMouseUp());
 
-    this.domNode.style.borderRadius = button.domNode.style.borderRadius;
+    this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
-    this.domNode.append(Tooltip());
+    this.#tooltip = new Tooltip();
+    this.domNode.append(this.#tooltip.domNode);
+
+    targetApp.selectedBases.addEventListener('change', () => this.#refresh());
+
+    this.#refresh();
+  }
+
+  #disable(): void {
+    this.#button.disable();
+  }
+
+  #enable(): void {
+    this.#button.enable();
+  }
+
+  isDisabled(): boolean {
+    return this.#button.isDisabled();
+  }
+
+  #refresh(): void {
+    let numSelectedBases = [...this.#targetApp.selectedBases].length;
+
+    if (numSelectedBases == 0) {
+      this.#disable();
+      this.#tooltip.textContent = 'No bases are selected.';
+    } else {
+      this.#enable();
+      this.#tooltip.textContent = this.#tooltip.enabledTextContent;
+    }
   }
 
   #handleMouseDown(event: MouseEvent): void {
+    if (this.isDisabled()) {
+      return;
+    }
+
     if (event.button != 0) {
       return;
     } else if (detectMac() && event.ctrlKey) {
@@ -92,17 +129,32 @@ export class ShiftButton<B extends Nucleobase, F> {
   }
 }
 
-function Tooltip() {
-  let text = document.createElement('p');
-  text.classList.add(styles['tooltip-text']);
-  text.textContent = 'Shift bases.';
+class Tooltip {
+  readonly domNode;
 
-  let textContainer = document.createElement('div');
-  textContainer.classList.add(styles['tooltip-text-container']);
-  textContainer.append(text);
+  #p;
 
-  let tooltip = document.createElement('div');
-  tooltip.classList.add(styles['tooltip']);
-  tooltip.append(textContainer);
-  return tooltip;
+  enabledTextContent = 'Shift bases.';
+
+  constructor() {
+    this.#p = document.createElement('p');
+    this.#p.classList.add(styles['tooltip-text']);
+    this.#p.textContent = this.enabledTextContent;
+
+    let textContainer = document.createElement('div');
+    textContainer.classList.add(styles['tooltip-text-container']);
+    textContainer.append(this.#p);
+
+    this.domNode = document.createElement('div');
+    this.domNode.classList.add(styles['tooltip']);
+    this.domNode.append(textContainer);
+  }
+
+  get textContent() {
+    return this.#p.textContent;
+  }
+
+  set textContent(textContent) {
+    this.#p.textContent = textContent;
+  }
 }

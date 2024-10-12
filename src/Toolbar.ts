@@ -53,11 +53,13 @@ export class Toolbar<B extends Nucleobase, F> {
     let layoutButton = new ToolbarButton('Layout');
     layoutButton.domNode.addEventListener('click', () => targetApp.openForm(targetApp.forms['layout']));
     layoutButton.domNode.style.marginLeft = '8px';
+    layoutButton.domNode.style.cursor = 'pointer';
     this.domNode.append(layoutButton.domNode);
 
     let exportButton = new ToolbarButton('Export');
     exportButton.domNode.addEventListener('click', () => targetApp.openForm(targetApp.forms['export']));
     exportButton.domNode.style.marginLeft = '2px';
+    exportButton.domNode.style.cursor = 'pointer';
     this.domNode.append(exportButton.domNode);
 
     this.dragTranslater = new DragTranslater(this.domNode);

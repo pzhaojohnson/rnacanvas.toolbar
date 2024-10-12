@@ -12,6 +12,14 @@
   padding: 4px 6px;
 }
 
+.draggable {
+  cursor: grab;
+}
+
+.draggable:active {
+  cursor: grabbing;
+}
+
 .tooltip {
   position: absolute;
 

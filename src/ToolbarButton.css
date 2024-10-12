@@ -1,4 +1,4 @@
-.toolbarButton {
+.toolbar-button {
   display: flex;
   padding: 6px 16px;
 
@@ -15,16 +15,20 @@
 
   outline: none;
 
+  opacity: 0.6;
+
   user-select: none;
   -webkit-user-select: none;
-
-  cursor: pointer;
 }
 
-.toolbarButton:hover {
+.enabled {
+  opacity: 1;
+}
+
+.enabled:hover {
   background-color: rgb(50, 50, 56);
 }
 
-.toolbarButton:active {
+.enabled:active {
   background-color: rgb(66, 66, 73);
 }
