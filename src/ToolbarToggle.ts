@@ -60,13 +60,15 @@ export class ToolbarToggle<B extends Nucleobase, F> {
     } else {
       this.#targetApp.toolbar.reposition();
     }
+
+    this.#refresh();
   }
 
   #refresh(): void {
     if (this.#targetApp.toolbar.isHidden()) {
       this.#tooltip.textContent = 'Unhide the Toolbar.';
     } else if (this.#targetApp.toolbar.displacement.magnitude == 0) {
-      this.#tooltip.textContent = 'Hide the Toolbar';
+      this.#tooltip.textContent = 'Hide the Toolbar.';
     } else {
       this.#tooltip.textContent = 'Reposition the Toolbar.';
     }
