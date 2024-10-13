@@ -41,7 +41,7 @@ function Tooltip() {
   textContainer.classList.add(styles['tooltip-text-container']);
   tooltip.append(textContainer);
 
-  let firstSentence = 'Anywhere along the toolbar can be dragged.';
+  let firstSentence = 'Anywhere along the Toolbar can be dragged.';
 
   let secondSentence = `${secondaryClick} when dragging to avoid pressing buttons.`;
 

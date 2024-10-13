@@ -35,8 +35,9 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
     icon.append(iconPath);
 
     this.#button = new ToolbarButton(icon);
-    this.#button.domNode.classList.add(styles['button'], styles['clickable']);
+    this.#button.domNode.classList.add(styles['clickable']);
     this.#button.domNode.addEventListener('click', () => this.#handleClick());
+    this.#button.domNode.style.padding = '4px 6px';
     this.domNode.append(this.#button.domNode);
 
     this.#tooltip = new Tooltip();
