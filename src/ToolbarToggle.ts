@@ -14,6 +14,8 @@ export class ToolbarToggle<B extends Nucleobase, F> {
 
   #tooltip;
 
+  #boundKey?: string;
+
   #targetApp: App<B, F>;
 
   constructor(targetApp: App<B, F>) {
@@ -64,13 +66,30 @@ export class ToolbarToggle<B extends Nucleobase, F> {
     this.#refresh();
   }
 
+  /**
+   * The key that the toolbar toggle has been bound to.
+   *
+   * Is displayed in the tooltip for the toolbar toggle when set.
+   */
+  get boundKey() {
+    return this.#boundKey;
+  }
+
+  set boundKey(boundKey) {
+    this.#boundKey = boundKey;
+
+    this.#refresh();
+  }
+
   #refresh(): void {
+    let boundKey = this.boundKey ? `[ ${this.boundKey} ]` : '';
+
     if (this.#targetApp.toolbar.isHidden()) {
-      this.#tooltip.textContent = 'Unhide the Toolbar.';
+      this.#tooltip.textContent = `Unhide the Toolbar. ${boundKey}`;
     } else if (this.#targetApp.toolbar.displacement.magnitude == 0) {
-      this.#tooltip.textContent = 'Hide the Toolbar.';
+      this.#tooltip.textContent = `Hide the Toolbar. ${boundKey}`;
     } else {
-      this.#tooltip.textContent = 'Reposition the Toolbar.';
+      this.#tooltip.textContent = `Reposition the Toolbar. ${boundKey}`;
     }
   }
 
