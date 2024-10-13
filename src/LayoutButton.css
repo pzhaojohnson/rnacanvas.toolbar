@@ -16,7 +16,7 @@
   background-color: black;
 
   top: -78px;
-  left: -61px;
+  left: -44px;
 
   border-radius: 6px;
 
@@ -24,7 +24,7 @@
 
   box-shadow: 0px 0px 6px #d9d9e724;
 
-  animation: tooltip-fade-in 1s;
+  animation: tooltip-fade-in 1.5s;
 
   display: none;
 }
@@ -33,7 +33,7 @@
   0% {
     opacity: 0;
   }
-  50% {
+  66.6% {
     opacity: 0;
   }
   100% {
@@ -50,7 +50,7 @@
   border-width: 18px 9px;
 
   top: 100%;
-  left: 71px;
+  left: 70px;
 }
 
 .tooltip-text-container {
