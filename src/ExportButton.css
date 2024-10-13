@@ -1,45 +1,11 @@
-.toolbar-toggle {
-  border-radius: 1000px;
+.export-button {
+  margin: 0px 0px 0px 2px;
 
-  display: flex;
-
-  background-color: transparent;
-  isolation: isolate;
-
-  user-select: none;
-  -webkit-user-select: none;
-
-  cursor: pointer;
+  position: relative;
 }
 
-.toolbar-toggle:hover .tooltip {
+.export-button:hover .tooltip {
   display: block;
-}
-
-.toolbar-toggle::before {
-  content: "";
-
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-
-  border-radius: 1000px;
-  background-color: black;
-  box-shadow: 0 0 12px #23232533;
-
-  z-index: -1;
-}
-
-.toolbar-toggle:hover::before {
-  transform: scale(1.166);
-  transition: transform 0.1s;
-}
-
-.toolbar-toggle:active::before {
-  transform: scale(1);
-  transition: transform 0s;
 }
 
 .tooltip {
@@ -49,12 +15,12 @@
 
   background-color: black;
 
-  top: -70px;
-  left: -6px;
+  top: -78px;
+  left: -60px;
 
   border-radius: 6px;
 
-  padding: 0px 20px 0px 20px;
+  padding: 0px 19px 0px 20px;
 
   box-shadow: 0px 0px 6px #d9d9e724;
 
@@ -84,7 +50,7 @@
   border-width: 18px 9px;
 
   top: 100%;
-  left: 13px;
+  left: 70px;
 }
 
 .tooltip-text-container {

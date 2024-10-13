@@ -12,6 +12,8 @@ import type { Nucleobase } from './Nucleobase';
 export class ToolbarToggle<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
+  #tooltip;
+
   #targetApp: App<B, F>;
 
   constructor(targetApp: App<B, F>) {
@@ -41,6 +43,13 @@ export class ToolbarToggle<B extends Nucleobase, F> {
     svg.addTo(this.domNode);
 
     this.domNode.addEventListener('click', () => this.press());
+
+    this.#tooltip = new Tooltip();
+    this.domNode.append(this.#tooltip.domNode);
+
+    this.domNode.addEventListener('mouseover', () => this.#refresh());
+
+    this.#refresh();
   }
 
   press(): void {
@@ -50,6 +59,16 @@ export class ToolbarToggle<B extends Nucleobase, F> {
       this.#targetApp.toolbar.hide();
     } else {
       this.#targetApp.toolbar.reposition();
+    }
+  }
+
+  #refresh(): void {
+    if (this.#targetApp.toolbar.isHidden()) {
+      this.#tooltip.textContent = 'Unhide the Toolbar.';
+    } else if (this.#targetApp.toolbar.displacement.magnitude == 0) {
+      this.#tooltip.textContent = 'Hide the Toolbar';
+    } else {
+      this.#tooltip.textContent = 'Reposition the Toolbar.';
     }
   }
 
@@ -72,4 +91,31 @@ interface App<B extends Nucleobase, F> {
    * The toolbar of the app.
    */
   readonly toolbar: Toolbar<B, F>;
+}
+
+class Tooltip {
+  readonly domNode;
+
+  #p;
+
+  constructor() {
+    this.#p = document.createElement('p');
+    this.#p.classList.add(styles['tooltip-text']);
+
+    let textContainer = document.createElement('div');
+    textContainer.classList.add(styles['tooltip-text-container']);
+    textContainer.append(this.#p);
+
+    this.domNode = document.createElement('div');
+    this.domNode.classList.add(styles['tooltip']);
+    this.domNode.append(textContainer);
+  }
+
+  get textContent() {
+    return this.#p.textContent;
+  }
+
+  set textContent(textContent) {
+    this.#p.textContent = textContent;
+  }
 }
