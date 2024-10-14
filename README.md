@@ -35,8 +35,8 @@ app.toolbar.unhide();
 app.toolbar.isHidden(); // false
 ```
 
-The displacement of the toolbar from its original position is also accessible,
-though the properties of this vector-like object are not currently settable.
+The displacement of the toolbar from its original position can also be accessed,
+though its properties are not currently settable.
 
 ```javascript
 // X and Y components of the displacement
