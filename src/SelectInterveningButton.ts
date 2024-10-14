@@ -13,6 +13,8 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
 
   #button;
 
+  #boundKey?: string;
+
   #tooltip;
 
   #targetApp;
@@ -36,7 +38,7 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
 
     this.#button = new ToolbarButton(icon);
     this.#button.domNode.classList.add(styles['clickable']);
-    this.#button.domNode.addEventListener('click', () => this.#handleClick());
+    this.#button.domNode.addEventListener('click', () => this.press());
     this.#button.domNode.style.padding = '4px 6px';
     this.domNode.append(this.#button.domNode);
 
@@ -69,6 +71,8 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
   }
 
   #updateTooltipText(): void {
+    let boundKey = this.boundKey ? `[ ${this.boundKey} ]` : '';
+
     let allBases = [...this.#targetApp.drawing.bases];
     let selectedBases = [...this.#targetApp.selectedBases];
 
@@ -84,7 +88,7 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
     } else if (maxSelectedBaseIndex - minSelectedBaseIndex + 1 == selectedBases.length) {
       this.#tooltip.textContent = 'There are no intervening bases to select.';
     } else {
-      this.#tooltip.textContent = 'Select intervening bases between those already selected. The Shift key can also be held while dragging-to-select bases.';
+      this.#tooltip.textContent = `Select intervening bases between those already selected. The Shift key can also be held while dragging-to-select bases. ${boundKey}`;
     }
   }
 
@@ -110,7 +114,7 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
     this.#updateTooltipText();
   }
 
-  #handleClick() {
+  press() {
     if (this.isDisabled()) {
       return;
     }
@@ -127,6 +131,21 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
     let basesToSelect = allBases.slice(min(selectedBaseIndices), max(selectedBaseIndices) + 1);
 
     this.#targetApp.selectedBases.addAll(basesToSelect);
+  }
+
+  /**
+   * The key that the button has been bound to.
+   *
+   * Is displayed in the tooltip when set.
+   */
+  get boundKey() {
+    return this.#boundKey;
+  }
+
+  set boundKey(boundKey) {
+    this.#boundKey = boundKey;
+
+    this.#refresh();
   }
 }
 

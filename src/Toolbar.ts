@@ -34,6 +34,8 @@ export class Toolbar<B extends Nucleobase, F> {
 
   #rotateButton;
 
+  readonly buttons;
+
   private readonly dragTranslater: DragTranslater;
 
   constructor(targetApp: App<B, F>) {
@@ -57,6 +59,10 @@ export class Toolbar<B extends Nucleobase, F> {
 
     let exportButton = new ExportButton(targetApp);
     this.domNode.append(exportButton.domNode);
+
+    this.buttons = {
+      'select-intervening': this.#selectInterveningButton,
+    };
 
     this.dragTranslater = new DragTranslater(this.domNode);
     this.dragTranslater.interactionDepth = 'deep';
