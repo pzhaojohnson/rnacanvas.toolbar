@@ -47,3 +47,25 @@ app.toolbar.displacement.y;
 app.toolbar.displacement.magnitude;
 app.toolbar.displacement.direction;
 ```
+
+## `ToolbarToggle`
+
+The `ToolbarToggle` represents the toolbar toggle for the RNAcanvas app,
+which is used to reposition and hide/unhide the toolbar.
+
+```javascript
+app; // the RNAcanvas app object
+
+// reposition and/or hide/unhide the toolbar
+app.toolbarToggle.press();
+```
+
+The toolbar toggle itself can also be hidden and unhidden.
+
+```javascript
+app.toolbarToggle.hide();
+app.toolbarToggle.isHidden(); // true
+
+app.toolbarToggle.unhide();
+app.toolbarToggle.isHidden(); // false
+```
