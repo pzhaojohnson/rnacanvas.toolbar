@@ -11,6 +11,10 @@ export class LayoutButton<B extends Nucleobase, F> {
 
   #button;
 
+  #tooltip;
+
+  #boundKey?: string;
+
   #targetApp;
 
   constructor(targetApp: App<B, F>) {
@@ -20,29 +24,66 @@ export class LayoutButton<B extends Nucleobase, F> {
     this.#button.domNode.addEventListener('click', () => this.press());
     this.#button.domNode.style.cursor = 'pointer';
 
+    this.#tooltip = new Tooltip();
+
     this.domNode = document.createElement('div');
     this.domNode.classList.add(styles['layout-button']);
-    this.domNode.append(this.#button.domNode, Tooltip());
+    this.domNode.append(this.#button.domNode, this.#tooltip.domNode);
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
+
+    this.#refresh();
+  }
+
+  #refresh(): void {
+    let boundKey = this.#boundKey ? `[ ${this.#boundKey} ]` : '';
+
+    this.#tooltip.textContent = `Open the Layout form. ${boundKey}`;
   }
 
   press(): void {
     this.#targetApp.openForm(this.#targetApp.forms['layout']);
   }
+
+  /**
+   * The key that the button has been bound to.
+   *
+   * Is displayed in the tooltip for the button when set.
+   */
+  get boundKey() {
+    return this.#boundKey;
+  }
+
+  set boundKey(boundKey) {
+    this.#boundKey = boundKey;
+
+    this.#refresh();
+  }
 }
 
-function Tooltip() {
-  let text = document.createElement('p');
-  text.classList.add(styles['tooltip-text']);
-  text.textContent = 'Open the Layout form.';
+class Tooltip {
+  readonly domNode;
 
-  let textContainer = document.createElement('div');
-  textContainer.classList.add(styles['tooltip-text-container']);
-  textContainer.append(text);
+  #p;
 
-  let tooltip = document.createElement('div');
-  tooltip.classList.add(styles['tooltip']);
-  tooltip.append(textContainer);
-  return tooltip;
+  constructor() {
+    this.#p = document.createElement('p');
+    this.#p.classList.add(styles['tooltip-text']);
+
+    let textContainer = document.createElement('div');
+    textContainer.classList.add(styles['tooltip-text-container']);
+    textContainer.append(this.#p);
+
+    this.domNode = document.createElement('div');
+    this.domNode.classList.add(styles['tooltip']);
+    this.domNode.append(textContainer);
+  }
+
+  get textContent() {
+    return this.#p.textContent;
+  }
+
+  set textContent(textContent) {
+    this.#p.textContent = textContent;
+  }
 }
