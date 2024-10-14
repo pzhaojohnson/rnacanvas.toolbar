@@ -11,6 +11,6 @@ npm install @rnacanvas/toolbar
 All exports of this package can be accessed as named imports.
 
 ```javascript
-// an example import
-import { Toolbar } from '@rnacanvas/toolbar';
+// some example imports
+import { Toolbar, ToolbarToggle } from '@rnacanvas/toolbar';
 ```
