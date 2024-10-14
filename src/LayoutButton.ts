@@ -11,9 +11,13 @@ export class LayoutButton<B extends Nucleobase, F> {
 
   #button;
 
+  #targetApp;
+
   constructor(targetApp: App<B, F>) {
+    this.#targetApp = targetApp;
+
     this.#button = new ToolbarButton('Layout');
-    this.#button.domNode.addEventListener('click', () => targetApp.openForm(targetApp.forms['layout']));
+    this.#button.domNode.addEventListener('click', () => this.press());
     this.#button.domNode.style.cursor = 'pointer';
 
     this.domNode = document.createElement('div');
@@ -21,6 +25,10 @@ export class LayoutButton<B extends Nucleobase, F> {
     this.domNode.append(this.#button.domNode, Tooltip());
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
+  }
+
+  press(): void {
+    this.#targetApp.openForm(this.#targetApp.forms['layout']);
   }
 }
 

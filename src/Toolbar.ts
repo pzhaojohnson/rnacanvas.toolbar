@@ -62,6 +62,8 @@ export class Toolbar<B extends Nucleobase, F> {
 
     this.buttons = {
       'select-intervening': this.#selectInterveningButton,
+      'layout': layoutButton,
+      'export': exportButton,
     };
 
     this.dragTranslater = new DragTranslater(this.domNode);
