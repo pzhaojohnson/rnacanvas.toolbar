@@ -35,11 +35,11 @@ app.toolbar.unhide();
 app.toolbar.isHidden(); // false
 ```
 
-The displacement of the toolbar from its original position can also be accessed,
+The displacement of the toolbar from its original position can also be directly accessed,
 though its properties are not currently settable.
 
 ```javascript
-// X and Y components of the displacement
+// X and Y components
 app.toolbar.displacement.x;
 app.toolbar.displacement.y;
 
