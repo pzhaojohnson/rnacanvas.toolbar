@@ -10,6 +10,10 @@ import { RotateButton } from './RotateButton';
 
 import { LayoutButton } from './LayoutButton';
 
+import { UndoButton } from './UndoButton';
+
+import { RedoButton } from './RedoButton';
+
 import { ExportButton } from './ExportButton';
 
 import type { App } from './App';
@@ -56,6 +60,12 @@ export class Toolbar<B extends Nucleobase, F> {
 
     let layoutButton = new LayoutButton(targetApp);
     this.domNode.append(layoutButton.domNode);
+
+    let undoButton = new UndoButton(targetApp);
+    this.domNode.append(undoButton.domNode);
+
+    let redoButton = new RedoButton(targetApp);
+    this.domNode.append(redoButton.domNode);
 
     let exportButton = new ExportButton(targetApp);
     this.domNode.append(exportButton.domNode);

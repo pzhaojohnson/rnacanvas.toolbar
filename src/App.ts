@@ -38,6 +38,12 @@ export interface App<B extends Nucleobase, F> {
   beforeDragging(): void;
   afterDragging(): void;
 
+  undo(): void | never;
+  redo(): void | never;
+
+  canUndo(): boolean;
+  canRedo(): boolean;
+
   openForm(form: F): void;
 
   forms: {
