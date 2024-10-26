@@ -49,6 +49,8 @@ export class UndoButton<B extends Nucleobase, F> {
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
+    targetApp.undoStack.addEventListener('change', () => this.#refresh());
+
     this.#refresh();
   }
 
@@ -73,15 +75,15 @@ export class UndoButton<B extends Nucleobase, F> {
   #updateTooltipText(): void {
     let boundKey = this.boundKey ? `[ ${this.boundKey} ]` : '';
 
-    if (this.#targetApp.canUndo()) {
-      this.#tooltip.textContent = `Undo. ${boundKey}`;
-    } else {
+    if (this.#targetApp.undoStack.isEmpty()) {
       this.#tooltip.textContent = `Can't undo.`;
+    } else {
+      this.#tooltip.textContent = `Undo. ${boundKey}`;
     }
   }
 
   #refresh(): void {
-    this.#targetApp.canUndo() ? this.#enable() : this.#disable();
+    this.#targetApp.undoStack.isEmpty() ? this.#disable() : this.#enable();
 
     this.#updateTooltipText();
   }
@@ -91,7 +93,7 @@ export class UndoButton<B extends Nucleobase, F> {
       return;
     }
 
-    if (this.#targetApp.canUndo()) {
+    if (!this.#targetApp.undoStack.isEmpty()) {
       this.#targetApp.undo();
     }
   }

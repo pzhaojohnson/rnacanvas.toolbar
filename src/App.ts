@@ -41,8 +41,23 @@ export interface App<B extends Nucleobase, F> {
   undo(): void | never;
   redo(): void | never;
 
-  canUndo(): boolean;
-  canRedo(): boolean;
+  undoStack: {
+    isEmpty(): boolean;
+
+    /**
+     * For listening for whenever the undo stack is pushed onto or popped off of.
+     */
+    addEventListener(name: 'change', listener: () => void): void;
+  }
+
+  redoStack: {
+    isEmpty(): boolean;
+
+    /**
+     * For listening for whenever the redo stack is pushed onto or popped off of.
+     */
+    addEventListener(name: 'change', listener: () => void): void;
+  }
 
   openForm(form: F): void;
 

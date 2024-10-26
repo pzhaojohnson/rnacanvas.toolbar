@@ -49,6 +49,8 @@ export class RedoButton<B extends Nucleobase, F> {
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
+    targetApp.redoStack.addEventListener('change', () => this.#refresh());
+
     this.#refresh();
   }
 
@@ -73,15 +75,15 @@ export class RedoButton<B extends Nucleobase, F> {
   #updateTooltipText(): void {
     let boundKey = this.boundKey ? `[ ${this.boundKey} ]` : '';
 
-    if (this.#targetApp.canRedo()) {
-      this.#tooltip.textContent = `Redo. ${boundKey}`;
-    } else {
+    if (this.#targetApp.redoStack.isEmpty()) {
       this.#tooltip.textContent = `Can't redo.`;
+    } else {
+      this.#tooltip.textContent = `Redo. ${boundKey}`;
     }
   }
 
   #refresh(): void {
-    this.#targetApp.canRedo() ? this.#enable() : this.#disable();
+    this.#targetApp.redoStack.isEmpty() ? this.#disable() : this.#enable();
 
     this.#updateTooltipText();
   }
@@ -91,7 +93,7 @@ export class RedoButton<B extends Nucleobase, F> {
       return;
     }
 
-    if (this.#targetApp.canRedo()) {
+    if (!this.#targetApp.redoStack.isEmpty()) {
       this.#targetApp.redo();
     }
   }
