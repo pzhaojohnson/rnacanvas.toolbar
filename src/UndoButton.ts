@@ -108,7 +108,7 @@ export class UndoButton<B extends Nucleobase, F> {
   }
 
   get keyBindings(): Iterable<{ scope: Element | undefined }> {
-    return [...this.keyBindings];
+    return [...this.#keyBindings];
   }
 }
 
