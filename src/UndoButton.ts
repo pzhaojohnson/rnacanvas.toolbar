@@ -6,16 +6,20 @@ import type { App } from './App';
 
 import type { Nucleobase } from './Nucleobase';
 
+import { KeyBinding } from '@rnacanvas/utilities';
+
+import { detectMac } from '@rnacanvas/utilities';
+
 export class UndoButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
   #button;
 
-  #boundKey?: string;
-
   #tooltip;
 
   #targetApp;
+
+  #keyBindings: KeyBinding[] = [];
 
   constructor(targetApp: App<B, F>) {
     this.#targetApp = targetApp;
@@ -49,6 +53,11 @@ export class UndoButton<B extends Nucleobase, F> {
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
+    this.#keyBindings.push(new KeyBinding('Z', () => this.press(), { ctrlKey: true, shiftKey: false }));
+    this.#keyBindings.push(new KeyBinding('Z', () => this.press(), { metaKey: true, shiftKey: false }));
+
+    this.#keyBindings.forEach(kb => kb.scope = this.domNode);
+
     targetApp.undoStack.addEventListener('change', () => this.#refresh());
 
     this.#refresh();
@@ -73,7 +82,7 @@ export class UndoButton<B extends Nucleobase, F> {
   }
 
   #updateTooltipText(): void {
-    let boundKey = this.boundKey ? `[ ${this.boundKey} ]` : '';
+    let boundKey = detectMac() ? '[ ⌘ Z ]' : '[ Ctrl+Z ]';
 
     if (this.#targetApp.undoStack.isEmpty()) {
       this.#tooltip.textContent = `Can't undo.`;
@@ -98,19 +107,8 @@ export class UndoButton<B extends Nucleobase, F> {
     }
   }
 
-  /**
-   * The key that the button has been bound to.
-   *
-   * Is displayed in the tooltip when set.
-   */
-  get boundKey() {
-    return this.#boundKey;
-  }
-
-  set boundKey(boundKey) {
-    this.#boundKey = boundKey;
-
-    this.#refresh();
+  get keyBindings(): Iterable<{ scope: Element | undefined }> {
+    return [...this.keyBindings];
   }
 }
 

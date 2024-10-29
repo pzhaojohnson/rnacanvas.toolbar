@@ -40,6 +40,10 @@ export class Toolbar<B extends Nucleobase, F> {
 
   #layoutButton;
 
+  #undoButton;
+
+  #redoButton;
+
   #exportButton;
 
   private readonly dragTranslater: DragTranslater;
@@ -63,11 +67,11 @@ export class Toolbar<B extends Nucleobase, F> {
     this.#layoutButton = new LayoutButton(targetApp);
     this.domNode.append(this.#layoutButton.domNode);
 
-    let undoButton = new UndoButton(targetApp);
-    this.domNode.append(undoButton.domNode);
+    this.#undoButton = new UndoButton(targetApp);
+    this.domNode.append(this.#undoButton.domNode);
 
-    let redoButton = new RedoButton(targetApp);
-    this.domNode.append(redoButton.domNode);
+    this.#redoButton = new RedoButton(targetApp);
+    this.domNode.append(this.#redoButton.domNode);
 
     this.#exportButton = new ExportButton(targetApp);
     this.domNode.append(this.#exportButton.domNode);
@@ -132,6 +136,8 @@ export class Toolbar<B extends Nucleobase, F> {
   get keyBindings(): Iterable<{ scope: Element | undefined }> {
     return [
       ...this.#selectInterveningButton.keyBindings,
+      ...this.#undoButton.keyBindings,
+      ...this.#redoButton.keyBindings,
       ...this.#layoutButton.keyBindings,
       ...this.#exportButton.keyBindings,
     ];
