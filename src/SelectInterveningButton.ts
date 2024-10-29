@@ -8,16 +8,18 @@ import type { Nucleobase } from './Nucleobase';
 
 import { min, max } from '@rnacanvas/math';
 
+import { KeyBinding } from '@rnacanvas/utilities';
+
 export class SelectInterveningButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
   #button;
 
-  #boundKey?: string;
-
   #tooltip;
 
   #targetApp;
+
+  #keyBindings: KeyBinding[] = [];
 
   constructor(targetApp: App<B, F>) {
     this.#targetApp = targetApp;
@@ -47,6 +49,9 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
+    this.#keyBindings.push(new KeyBinding('I', () => this.press()));
+    this.#keyBindings.forEach(kb => kb.scope = this.domNode);
+
     targetApp.selectedBases.addEventListener('change', () => this.#refresh());
 
     this.#refresh();
@@ -71,7 +76,7 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
   }
 
   #updateTooltipText(): void {
-    let boundKey = this.boundKey ? `[ ${this.boundKey} ]` : '';
+    let boundKey = '[ I ]';
 
     let allBases = [...this.#targetApp.drawing.bases];
     let selectedBases = [...this.#targetApp.selectedBases];
@@ -133,19 +138,8 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
     this.#targetApp.selectedBases.addAll(basesToSelect);
   }
 
-  /**
-   * The key that the button has been bound to.
-   *
-   * Is displayed in the tooltip when set.
-   */
-  get boundKey() {
-    return this.#boundKey;
-  }
-
-  set boundKey(boundKey) {
-    this.#boundKey = boundKey;
-
-    this.#refresh();
+  get keyBindings(): Iterable<{ scope: Element | undefined }> {
+    return [...this.#keyBindings];
   }
 }
 

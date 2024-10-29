@@ -38,7 +38,9 @@ export class Toolbar<B extends Nucleobase, F> {
 
   #rotateButton;
 
-  readonly buttons;
+  #layoutButton;
+
+  #exportButton;
 
   private readonly dragTranslater: DragTranslater;
 
@@ -58,8 +60,8 @@ export class Toolbar<B extends Nucleobase, F> {
     this.#rotateButton = new RotateButton(targetApp);
     this.domNode.append(this.#rotateButton.domNode);
 
-    let layoutButton = new LayoutButton(targetApp);
-    this.domNode.append(layoutButton.domNode);
+    this.#layoutButton = new LayoutButton(targetApp);
+    this.domNode.append(this.#layoutButton.domNode);
 
     let undoButton = new UndoButton(targetApp);
     this.domNode.append(undoButton.domNode);
@@ -67,14 +69,8 @@ export class Toolbar<B extends Nucleobase, F> {
     let redoButton = new RedoButton(targetApp);
     this.domNode.append(redoButton.domNode);
 
-    let exportButton = new ExportButton(targetApp);
-    this.domNode.append(exportButton.domNode);
-
-    this.buttons = {
-      'select-intervening': this.#selectInterveningButton,
-      'layout': layoutButton,
-      'export': exportButton,
-    };
+    this.#exportButton = new ExportButton(targetApp);
+    this.domNode.append(this.#exportButton.domNode);
 
     this.dragTranslater = new DragTranslater(this.domNode);
     this.dragTranslater.interactionDepth = 'deep';
@@ -82,6 +78,8 @@ export class Toolbar<B extends Nucleobase, F> {
     // allows the toolbar to be dragged when context-clicking buttons
     // (without opening a context menu or activating buttons)
     this.domNode.oncontextmenu = () => false;
+
+    [...this.keyBindings].forEach(kb => kb.scope = this.domNode);
   }
 
   /**
@@ -129,5 +127,13 @@ export class Toolbar<B extends Nucleobase, F> {
   isHidden(): boolean {
     // keep in mind that an invalid visibility style value results in a visible element
     return ['hidden', 'collapse'].includes(this.domNode.style.visibility);
+  }
+
+  get keyBindings(): Iterable<{ scope: Element | undefined }> {
+    return [
+      ...this.#selectInterveningButton.keyBindings,
+      ...this.#layoutButton.keyBindings,
+      ...this.#exportButton.keyBindings,
+    ];
   }
 }

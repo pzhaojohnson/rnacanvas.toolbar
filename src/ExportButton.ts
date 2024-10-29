@@ -6,6 +6,8 @@ import type { App } from './App';
 
 import type { Nucleobase } from './Nucleobase';
 
+import { KeyBinding } from '@rnacanvas/utilities';
+
 export class ExportButton<B extends Nucleobase, F> {
   readonly domNode;
 
@@ -13,9 +15,9 @@ export class ExportButton<B extends Nucleobase, F> {
 
   #tooltip;
 
-  #boundKey?: string;
-
   #targetApp;
+
+  #keyBindings: KeyBinding[] = [];
 
   constructor(targetApp: App<B, F>) {
     this.#targetApp = targetApp;
@@ -32,11 +34,14 @@ export class ExportButton<B extends Nucleobase, F> {
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
+    this.#keyBindings.push(new KeyBinding('E', () => this.press()));
+    this.#keyBindings.forEach(kb => kb.scope = this.domNode);
+
     this.#refresh();
   }
 
   #refresh(): void {
-    let boundKey = this.#boundKey ? `[ ${this.#boundKey} ]` : '';
+    let boundKey = '[ E ]';
 
     this.#tooltip.textContent = `Open the Export form. ${boundKey}`;
   }
@@ -45,19 +50,8 @@ export class ExportButton<B extends Nucleobase, F> {
     this.#targetApp.openForm(this.#targetApp.forms['export']);
   }
 
-  /**
-   * The key that the button has been bound to.
-   *
-   * Is displayed in the tooltip for the button when set.
-   */
-  get boundKey() {
-    return this.#boundKey;
-  }
-
-  set boundKey(boundKey) {
-    this.#boundKey = boundKey;
-
-    this.#refresh();
+  get keyBindings(): Iterable<{ scope: Element | undefined }> {
+    return [...this.#keyBindings];
   }
 }
 
