@@ -49,7 +49,8 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
-    this.#keyBindings.push(new KeyBinding('I', () => this.press()));
+    // make sure not to interfere with the Ctrl+Shift+I key binding to open web browser dev tools on Windows and Linux
+    this.#keyBindings.push(new KeyBinding('I', () => this.press(), { ctrlKey: false }));
     this.#keyBindings.forEach(kb => kb.scope = this.domNode);
 
     targetApp.selectedBases.addEventListener('change', () => this.#refresh());
