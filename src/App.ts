@@ -13,6 +13,13 @@ export interface App<B extends Nucleobase, F> {
      */
     readonly bases: Iterable<B>;
 
+    /**
+     * Rotates the specified bases by the given angle.
+     *
+     * Also rotates any elements attached to the bases (such as base numberings).
+     */
+    rotate(bases: B[], angle: number): void;
+
     readonly horizontalClientScaling: number;
     readonly verticalClientScaling: number;
   };

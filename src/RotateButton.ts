@@ -12,8 +12,6 @@ import { midpoint } from '@rnacanvas/points';
 
 import { direction } from '@rnacanvas/points';
 
-import { rotate } from '@rnacanvas/bases-layout';
-
 export class RotateButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
@@ -158,7 +156,7 @@ export class RotateButton<B extends Nucleobase, F> {
       this.#targetApp.beforeDragging();
     }
 
-    rotate(selectedBases, currentDirection - previousDirection);
+    this.#targetApp.drawing.rotate(selectedBases, currentDirection - previousDirection);
 
     this.#rotated = true;
   }
