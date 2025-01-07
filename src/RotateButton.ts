@@ -6,7 +6,7 @@ import type { App } from './App';
 
 import type { Nucleobase } from './Nucleobase';
 
-import { detectMac } from '@rnacanvas/utilities';
+import { detectMacOS } from '@rnacanvas/utilities';
 
 import { midpoint } from '@rnacanvas/points';
 
@@ -117,7 +117,7 @@ export class RotateButton<B extends Nucleobase, F> {
 
     if (event.button != 0) {
       return;
-    } else if (detectMac() && event.ctrlKey) {
+    } else if (detectMacOS() && event.ctrlKey) {
       return;
     }
 

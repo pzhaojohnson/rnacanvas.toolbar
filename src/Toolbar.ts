@@ -83,7 +83,7 @@ export class Toolbar<B extends Nucleobase, F> {
     // (without opening a context menu or activating buttons)
     this.domNode.oncontextmenu = () => false;
 
-    [...this.keyBindings].forEach(kb => kb.scope = this.domNode);
+    [...this.keyBindings].forEach(kb => kb.owner = this.domNode);
   }
 
   /**
@@ -133,7 +133,7 @@ export class Toolbar<B extends Nucleobase, F> {
     return ['hidden', 'collapse'].includes(this.domNode.style.visibility);
   }
 
-  get keyBindings(): Iterable<{ scope: Element | undefined }> {
+  get keyBindings(): Iterable<{ owner: Element | undefined }> {
     return [
       ...this.#selectInterveningButton.keyBindings,
       ...this.#undoButton.keyBindings,

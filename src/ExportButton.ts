@@ -35,7 +35,7 @@ export class ExportButton<B extends Nucleobase, F> {
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
     this.#keyBindings.push(new KeyBinding('E', () => this.press()));
-    this.#keyBindings.forEach(kb => kb.scope = this.domNode);
+    this.#keyBindings.forEach(kb => kb.owner = this.domNode);
 
     this.#refresh();
   }
@@ -50,7 +50,7 @@ export class ExportButton<B extends Nucleobase, F> {
     this.#targetApp.openForm(this.#targetApp.forms['export']);
   }
 
-  get keyBindings(): Iterable<{ scope: Element | undefined }> {
+  get keyBindings(): Iterable<{ owner: Element | undefined }> {
     return [...this.#keyBindings];
   }
 }

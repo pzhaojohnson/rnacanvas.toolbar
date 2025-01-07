@@ -1,6 +1,6 @@
 import * as styles from './GrabEtching.css';
 
-import { detectMac } from '@rnacanvas/utilities';
+import { detectMacOS } from '@rnacanvas/utilities';
 
 export function GrabEtching() {
   let grabEtching = document.createElement('div');
@@ -31,7 +31,7 @@ function Line() {
   return line;
 }
 
-let secondaryClick = detectMac() ? 'Control-click' : 'Right-click'
+let secondaryClick = detectMacOS() ? 'Control-click' : 'Right-click'
 
 function Tooltip() {
   let tooltip = document.createElement('div');

@@ -8,7 +8,7 @@ import type { Nucleobase } from './Nucleobase';
 
 import { KeyBinding } from '@rnacanvas/utilities';
 
-import { detectMac } from '@rnacanvas/utilities';
+import { detectMacOS } from '@rnacanvas/utilities';
 
 export class RedoButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
@@ -56,7 +56,7 @@ export class RedoButton<B extends Nucleobase, F> {
     this.#keyBindings.push(new KeyBinding('Z', () => this.press(), { ctrlKey: true, shiftKey: true }));
     this.#keyBindings.push(new KeyBinding('Z', () => this.press(), { metaKey: true, shiftKey: true }));
 
-    this.#keyBindings.forEach(kb => kb.scope = this.domNode);
+    this.#keyBindings.forEach(kb => kb.owner = this.domNode);
 
     targetApp.redoStack.addEventListener('change', () => this.#refresh());
 
@@ -82,7 +82,7 @@ export class RedoButton<B extends Nucleobase, F> {
   }
 
   #updateTooltipText(): void {
-    let boundKey = detectMac() ? '[ ⇧ ⌘ Z ]' : '[ Shift+Ctrl+Z ]';
+    let boundKey = detectMacOS() ? '[ ⇧ ⌘ Z ]' : '[ Shift+Ctrl+Z ]';
 
     if (this.#targetApp.redoStack.isEmpty()) {
       this.#tooltip.textContent = `Can't redo.`;
@@ -107,7 +107,7 @@ export class RedoButton<B extends Nucleobase, F> {
     }
   }
 
-  get keyBindings(): Iterable<{ scope: Element | undefined }> {
+  get keyBindings(): Iterable<{ owner: Element | undefined }> {
     return [...this.#keyBindings];
   }
 }

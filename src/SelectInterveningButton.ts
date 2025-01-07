@@ -51,7 +51,7 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
 
     // make sure not to interfere with the Ctrl+Shift+I key binding to open web browser dev tools on Windows and Linux
     this.#keyBindings.push(new KeyBinding('I', () => this.press(), { ctrlKey: false }));
-    this.#keyBindings.forEach(kb => kb.scope = this.domNode);
+    this.#keyBindings.forEach(kb => kb.owner = this.domNode);
 
     targetApp.selectedBases.addEventListener('change', () => this.#refresh());
 
@@ -139,7 +139,7 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
     this.#targetApp.selectedBases.addAll(basesToSelect);
   }
 
-  get keyBindings(): Iterable<{ scope: Element | undefined }> {
+  get keyBindings(): Iterable<{ owner: Element | undefined }> {
     return [...this.#keyBindings];
   }
 }

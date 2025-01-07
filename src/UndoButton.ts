@@ -8,7 +8,7 @@ import type { Nucleobase } from './Nucleobase';
 
 import { KeyBinding } from '@rnacanvas/utilities';
 
-import { detectMac } from '@rnacanvas/utilities';
+import { detectMacOS } from '@rnacanvas/utilities';
 
 export class UndoButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
@@ -56,7 +56,7 @@ export class UndoButton<B extends Nucleobase, F> {
     this.#keyBindings.push(new KeyBinding('Z', () => this.press(), { ctrlKey: true, shiftKey: false }));
     this.#keyBindings.push(new KeyBinding('Z', () => this.press(), { metaKey: true, shiftKey: false }));
 
-    this.#keyBindings.forEach(kb => kb.scope = this.domNode);
+    this.#keyBindings.forEach(kb => kb.owner = this.domNode);
 
     targetApp.undoStack.addEventListener('change', () => this.#refresh());
 
@@ -82,7 +82,7 @@ export class UndoButton<B extends Nucleobase, F> {
   }
 
   #updateTooltipText(): void {
-    let boundKey = detectMac() ? '[ ⌘ Z ]' : '[ Ctrl+Z ]';
+    let boundKey = detectMacOS() ? '[ ⌘ Z ]' : '[ Ctrl+Z ]';
 
     if (this.#targetApp.undoStack.isEmpty()) {
       this.#tooltip.textContent = `Can't undo.`;
@@ -107,7 +107,7 @@ export class UndoButton<B extends Nucleobase, F> {
     }
   }
 
-  get keyBindings(): Iterable<{ scope: Element | undefined }> {
+  get keyBindings(): Iterable<{ owner: Element | undefined }> {
     return [...this.#keyBindings];
   }
 }
