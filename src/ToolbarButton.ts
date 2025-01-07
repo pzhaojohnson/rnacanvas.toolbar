@@ -3,7 +3,7 @@ import * as styles from './ToolbarButton.css';
 import { detectMac } from '@rnacanvas/utilities';
 
 export class ToolbarButton {
-  readonly domNode = document.createElement('button');
+  readonly domNode = document.createElement('div');
 
   constructor(content: string | SVGSVGElement) {
     this.domNode.classList.add(styles['toolbar-button'], styles['enabled']);
