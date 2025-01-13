@@ -26,7 +26,7 @@ import { Vector } from '@rnacanvas/vectors.oopified';
  * The toolbar for the RNAcanvas app.
  */
 export class Toolbar<B extends Nucleobase, F> {
-  private readonly domNode = document.createElement('div');
+  readonly domNode = document.createElement('div');
 
   #targetApp: App<B, F>;
 
