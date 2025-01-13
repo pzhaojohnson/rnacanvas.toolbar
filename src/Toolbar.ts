@@ -77,6 +77,7 @@ export class Toolbar<B extends Nucleobase, F> {
     this.domNode.oncontextmenu = () => false;
 
     [...this.keyBindings].forEach(kb => kb.owner = this.domNode);
+    this.domNode.tabIndex = -1;
   }
 
   /**
