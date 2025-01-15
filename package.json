@@ -1,7 +1,7 @@
 {
   "name": "@rnacanvas/toolbar",
-  "version": "18.1.1",
-  "description": "The toolbar for the RNAcanvas app",
+  "version": "18.1.2",
+  "description": "The Toolbar",
   "repository": {
     "type": "git",
     "url": "https://github.com/pzhaojohnson/rnacanvas.toolbar.git"
