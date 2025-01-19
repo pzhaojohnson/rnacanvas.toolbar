@@ -6,7 +6,7 @@ import type { App } from './App';
 
 import type { Nucleobase } from './Nucleobase';
 
-import { shift } from '@rnacanvas/bases-layout';
+import { shift } from '@rnacanvas/layout';
 
 import { detectMacOS } from '@rnacanvas/utilities';
 
