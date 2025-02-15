@@ -70,6 +70,5 @@ export interface App<B extends Nucleobase, F> {
 
   forms: {
     'layout': F;
-    'export': F;
   };
 }
