@@ -14,6 +14,8 @@ import { UndoButton } from './UndoButton';
 
 import { RedoButton } from './RedoButton';
 
+import { EditButton } from './EditButton';
+
 import type { App } from './App';
 
 import type { Nucleobase } from './Nucleobase';
@@ -42,6 +44,8 @@ export class Toolbar<B extends Nucleobase, F> {
 
   #redoButton;
 
+  #editButton;
+
   private readonly dragTranslater: DragTranslater;
 
   constructor(targetApp: App<B, F>) {
@@ -68,6 +72,9 @@ export class Toolbar<B extends Nucleobase, F> {
 
     this.#redoButton = new RedoButton(targetApp);
     this.domNode.append(this.#redoButton.domNode);
+
+    this.#editButton = new EditButton(targetApp);
+    this.domNode.append(this.#editButton.domNode);
 
     this.dragTranslater = new DragTranslater(this.domNode);
     this.dragTranslater.interactionDepth = 'deep';
