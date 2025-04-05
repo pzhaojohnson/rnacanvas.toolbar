@@ -87,12 +87,14 @@ export class RotateButton<B extends Nucleobase, F> {
   #updateTooltipText(): void {
     let numSelectedBases = [...this.#targetApp.selectedBases].length;
 
+    let Alt = detectMacOS() ? '⌥' : 'Alt';
+
     if (numSelectedBases == 0) {
       this.#tooltip.textContent = 'No bases are selected.';
     } else if (numSelectedBases == 1) {
       this.#tooltip.textContent = 'At least two bases must be selected.';
     } else {
-      this.#tooltip.textContent = 'Rotate bases.';
+      this.#tooltip.textContent = `Rotate bases. [ ${Alt} ←↑↓→ ]`;
     }
   }
 
