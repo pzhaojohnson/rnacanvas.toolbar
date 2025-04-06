@@ -1,5 +1,5 @@
 .edit-button {
-  margin: 0px 0px 0px 5px;
+  margin: 0px 0px 0px 2px;
 
   position: relative;
 }
@@ -16,7 +16,7 @@
   background-color: black;
 
   top: -78px;
-  left: -45px;
+  left: -46px;
 
   border-radius: 6px;
 
@@ -50,7 +50,7 @@
   border-width: 18px 9px;
 
   top: 100%;
-  left: 65px;
+  left: 64px;
 }
 
 .tooltip-text-container {

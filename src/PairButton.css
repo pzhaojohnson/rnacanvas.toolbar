@@ -1,5 +1,5 @@
 .pair-button {
-  margin: 0px 0px 0px 3px;
+  margin: 0px 0px 0px 1px;
 
   position: relative;
 }
@@ -28,7 +28,7 @@
   background-color: black;
 
   top: -73px;
-  left: -17px;
+  left: -21px;
 
   border-radius: 6px;
 
@@ -62,7 +62,7 @@
   border-width: 18px 9px;
 
   top: 100%;
-  left: 28px;
+  left: 30px;
 }
 
 .tooltip-text-container {
