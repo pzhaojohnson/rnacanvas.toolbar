@@ -10,6 +10,10 @@ import { RotateButton } from './RotateButton';
 
 import { LayoutButton } from './LayoutButton';
 
+import { PairButton } from './PairButton';
+
+import { UnpairButton } from './UnpairButton';
+
 import { UndoButton } from './UndoButton';
 
 import { RedoButton } from './RedoButton';
@@ -40,6 +44,10 @@ export class Toolbar<B extends Nucleobase, F> {
 
   #layoutButton;
 
+  #pairButton;
+
+  #unpairButton;
+
   #undoButton;
 
   #redoButton;
@@ -66,6 +74,12 @@ export class Toolbar<B extends Nucleobase, F> {
 
     this.#layoutButton = new LayoutButton(targetApp);
     this.domNode.append(this.#layoutButton.domNode);
+
+    this.#pairButton = new PairButton(targetApp);
+    this.domNode.append(this.#pairButton.domNode);
+
+    this.#unpairButton = new UnpairButton(targetApp);
+    this.domNode.append(this.#unpairButton.domNode);
 
     this.#undoButton = new UndoButton(targetApp);
     this.domNode.append(this.#undoButton.domNode);
@@ -137,6 +151,8 @@ export class Toolbar<B extends Nucleobase, F> {
   get keyBindings(): Iterable<{ owner: Element | undefined }> {
     return [
       ...this.#selectInterveningButton.keyBindings,
+      ...this.#pairButton.keyBindings,
+      ...this.#unpairButton.keyBindings,
       ...this.#undoButton.keyBindings,
       ...this.#redoButton.keyBindings,
       ...this.#layoutButton.keyBindings,

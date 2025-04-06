@@ -1,6 +1,6 @@
 {
   "name": "@rnacanvas/toolbar",
-  "version": "19.1.0",
+  "version": "20.0.0",
   "description": "The Toolbar",
   "repository": {
     "type": "git",
@@ -28,6 +28,8 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
+    "@rnacanvas/base-pairs": "^2.4.0",
+    "@rnacanvas/base-pairs.oopified": "^1.18.0",
     "@rnacanvas/forms": "^2.0.0",
     "@rnacanvas/layout": "^1.0.0",
     "@rnacanvas/math": "^1.17.0",

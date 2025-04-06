@@ -1,10 +1,14 @@
 import type { Nucleobase } from './Nucleobase';
 
+import type { SecondaryBond } from './SecondaryBond';
+
 /**
  * The app interface used by the toolbar.
  */
 export interface App<B extends Nucleobase, F> {
   readonly drawing: {
+    readonly domNode: SVGSVGElement;
+
     /**
      * All bases in the drawing of the app.
      *
@@ -22,6 +26,16 @@ export interface App<B extends Nucleobase, F> {
 
     readonly horizontalClientScaling: number;
     readonly verticalClientScaling: number;
+
+    /**
+     * All secondary bonds in the drawing.
+     */
+    readonly secondaryBonds: Iterable<SecondaryBond<B>>;
+
+    /**
+     * Adds a secondary bond between the two bases.
+     */
+    addSecondaryBond(base1: Nucleobase, base2: Nucleobase): void;
   };
 
   /**
@@ -47,6 +61,8 @@ export interface App<B extends Nucleobase, F> {
 
   undo(): void | never;
   redo(): void | never;
+
+  pushUndoStack(): void;
 
   undoStack: {
     isEmpty(): boolean;
