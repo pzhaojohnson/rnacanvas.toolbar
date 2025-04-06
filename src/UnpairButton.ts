@@ -84,6 +84,7 @@ export class UnpairButton<B extends Nucleobase, F> {
 
     if (selectedBases.size == 0) {
       this.#tooltip.textContent = 'No bases are selected.';
+      return;
     }
 
     let secondaryBonds = [...this.#targetApp.drawing.secondaryBonds];
