@@ -4,10 +4,6 @@
   position: relative;
 }
 
-.undo-button:hover .tooltip {
-  display: block;
-}
-
 .clickable {
   cursor: pointer;
 }
@@ -18,76 +14,4 @@
 
 .draggable:active {
   cursor: grabbing;
-}
-
-.tooltip {
-  position: absolute;
-
-  height: 44px;
-
-  background-color: black;
-
-  top: -73px;
-  left: -17px;
-
-  border-radius: 6px;
-
-  padding: 0px 20px 0px 20px;
-
-  box-shadow: 0px 0px 6px #d9d9e724;
-
-  animation: tooltip-fade-in 1.5s;
-
-  display: none;
-}
-
-@keyframes tooltip-fade-in {
-  0% {
-    opacity: 0;
-  }
-  66.6% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.tooltip:before {
-  content: "";
-  position: absolute;
-
-  border-style: solid;
-  border-color: black transparent transparent transparent;
-  border-width: 18px 9px;
-
-  top: 100%;
-  left: 28px;
-}
-
-.tooltip-text-container {
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 7px;
-}
-
-.tooltip-text {
-  margin: 0px;
-  padding: 0px;
-
-  font-family: "Open Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  font-style: normal;
-  color: white;
-
-  text-wrap: nowrap;
-
-  user-select: none;
-  -webkit-user-select: none;
-
-  pointer-events: none;
 }

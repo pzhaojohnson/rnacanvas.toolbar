@@ -6,6 +6,8 @@ import type { App } from './App';
 
 import type { Nucleobase } from './Nucleobase';
 
+import { Tooltip } from '@rnacanvas/tooltips';
+
 import { detectMacOS } from '@rnacanvas/utilities';
 
 import { midpoint } from '@rnacanvas/points';
@@ -17,7 +19,7 @@ export class RotateButton<B extends Nucleobase, F> {
 
   #button;
 
-  #tooltip;
+  #tooltip = new Tooltip('');
 
   #targetApp;
 
@@ -64,8 +66,7 @@ export class RotateButton<B extends Nucleobase, F> {
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
-    this.#tooltip = new Tooltip();
-    this.domNode.append(this.#tooltip.domNode);
+    this.#tooltip.owner = this.domNode;
 
     targetApp.selectedBases.addEventListener('change', () => this.#refresh());
 
@@ -169,32 +170,5 @@ export class RotateButton<B extends Nucleobase, F> {
     if (this.#rotated) {
       this.#targetApp.afterDragging();
     }
-  }
-}
-
-class Tooltip {
-  readonly domNode;
-
-  #p;
-
-  constructor() {
-    this.#p = document.createElement('p');
-    this.#p.classList.add(styles['tooltip-text']);
-
-    let textContainer = document.createElement('div');
-    textContainer.classList.add(styles['tooltip-text-container']);
-    textContainer.append(this.#p);
-
-    this.domNode = document.createElement('div');
-    this.domNode.classList.add(styles['tooltip']);
-    this.domNode.append(textContainer);
-  }
-
-  get textContent() {
-    return this.#p.textContent;
-  }
-
-  set textContent(textContent) {
-    this.#p.textContent = textContent;
   }
 }

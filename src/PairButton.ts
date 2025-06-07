@@ -10,6 +10,8 @@ import { BasePair } from '@rnacanvas/base-pairs.oopified';
 
 import { KeyBinding } from '@rnacanvas/utilities';
 
+import { Tooltip } from '@rnacanvas/tooltips';
+
 import { detectMacOS } from '@rnacanvas/utilities';
 
 export class PairButton<B extends Nucleobase, F> {
@@ -17,7 +19,7 @@ export class PairButton<B extends Nucleobase, F> {
 
   #button;
 
-  #tooltip;
+  #tooltip = new Tooltip('');
 
   #targetApp;
 
@@ -46,8 +48,7 @@ export class PairButton<B extends Nucleobase, F> {
     this.#button.domNode.style.padding = '4px 6px';
     this.domNode.append(this.#button.domNode);
 
-    this.#tooltip = new Tooltip();
-    this.domNode.append(this.#tooltip.domNode);
+    this.#tooltip.owner = this.domNode;
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
@@ -144,32 +145,6 @@ export class PairButton<B extends Nucleobase, F> {
 
   get keyBindings(): Iterable<{ owner: Element | undefined }> {
     return [...this.#keyBindings];
-  }
-}
-
-class Tooltip {
-  readonly domNode = document.createElement('div');
-
-  #p;
-
-  constructor() {
-    this.#p = document.createElement('p');
-    this.#p.classList.add(styles['tooltip-text']);
-
-    let textContainer = document.createElement('div');
-    textContainer.classList.add(styles['tooltip-text-container']);
-    textContainer.append(this.#p);
-
-    this.domNode.classList.add(styles['tooltip']);
-    this.domNode.append(textContainer);
-  }
-
-  get textContent() {
-    return this.#p.textContent;
-  }
-
-  set textContent(textContent) {
-    this.#p.textContent = textContent;
   }
 }
 

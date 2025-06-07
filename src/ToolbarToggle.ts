@@ -6,13 +6,15 @@ import type { Toolbar } from './Toolbar';
 
 import type { Nucleobase } from './Nucleobase';
 
+import { Tooltip } from '@rnacanvas/tooltips';
+
 /**
  * A button to reposition and hide/unhide the toolbar.
  */
 export class ToolbarToggle<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
 
-  #tooltip;
+  #tooltip = new Tooltip('');
 
   #boundKey?: string;
 
@@ -46,8 +48,9 @@ export class ToolbarToggle<B extends Nucleobase, F> {
 
     this.domNode.addEventListener('click', () => this.press());
 
-    this.#tooltip = new Tooltip();
-    this.domNode.append(this.#tooltip.domNode);
+    this.#tooltip.owner = this.domNode;
+
+    this.#tooltip.pointerDisplacement = 40;
 
     this.domNode.addEventListener('mouseover', () => this.#refresh());
 
@@ -112,31 +115,4 @@ interface App<B extends Nucleobase, F> {
    * The toolbar of the app.
    */
   readonly toolbar: Toolbar<B, F>;
-}
-
-class Tooltip {
-  readonly domNode;
-
-  #p;
-
-  constructor() {
-    this.#p = document.createElement('p');
-    this.#p.classList.add(styles['tooltip-text']);
-
-    let textContainer = document.createElement('div');
-    textContainer.classList.add(styles['tooltip-text-container']);
-    textContainer.append(this.#p);
-
-    this.domNode = document.createElement('div');
-    this.domNode.classList.add(styles['tooltip']);
-    this.domNode.append(textContainer);
-  }
-
-  get textContent() {
-    return this.#p.textContent;
-  }
-
-  set textContent(textContent) {
-    this.#p.textContent = textContent;
-  }
 }
