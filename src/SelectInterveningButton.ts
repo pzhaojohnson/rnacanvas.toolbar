@@ -48,7 +48,7 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
 
     this.#tooltip.owner = this.domNode;
 
-    this.#tooltip.pointerDisplacement = 60;
+    this.#tooltip.padding = 12;
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
@@ -92,12 +92,16 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
 
     if (selectedBases.length == 0) {
       this.#tooltip.textContent = 'No bases are selected.';
+      this.#tooltip.pointerDisplacement = 0;
     } else if (selectedBases.length == 1) {
       this.#tooltip.textContent = 'At least two bases must be selected.';
+      this.#tooltip.pointerDisplacement = -68;
     } else if (maxSelectedBaseIndex - minSelectedBaseIndex + 1 == selectedBases.length) {
       this.#tooltip.textContent = 'There are no intervening bases to select.';
+      this.#tooltip.pointerDisplacement = -91;
     } else {
       this.#tooltip.textContent = `Select intervening bases between those already selected. The Shift key can also be held while dragging-to-select bases. ${boundKey}`;
+      this.#tooltip.pointerDisplacement = -523;
     }
   }
 

@@ -26,7 +26,8 @@ export function GrabEtching() {
 
   tooltip.owner = grabEtching;
 
-  tooltip.pointerDisplacement = 225;
+  tooltip.padding = 12;
+  tooltip.pointerDisplacement = -483;
 
   return grabEtching;
 }

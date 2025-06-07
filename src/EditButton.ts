@@ -31,6 +31,8 @@ export class EditButton<B extends Nucleobase, F> {
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
     this.#tooltip.owner = this.domNode;
+
+    this.#tooltip.padding = 12;
   }
 
   press(): void {

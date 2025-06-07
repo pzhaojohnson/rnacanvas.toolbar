@@ -48,6 +48,8 @@ export class UnpairButton<B extends Nucleobase, F> {
 
     this.#tooltip.owner = this.domNode;
 
+    this.#tooltip.padding = 12;
+
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
     this.#keyBindings.push(new KeyBinding('U', () => this.press()));

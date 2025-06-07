@@ -50,7 +50,7 @@ export class ToolbarToggle<B extends Nucleobase, F> {
 
     this.#tooltip.owner = this.domNode;
 
-    this.#tooltip.pointerDisplacement = 40;
+    this.#tooltip.padding = 7;
 
     this.domNode.addEventListener('mouseover', () => this.#refresh());
 
@@ -89,10 +89,13 @@ export class ToolbarToggle<B extends Nucleobase, F> {
 
     if (this.#targetApp.toolbar.isHidden()) {
       this.#tooltip.textContent = `Unhide the Toolbar. ${boundKey}`;
+      this.#tooltip.pointerDisplacement = -127;
     } else if (this.#targetApp.toolbar.displacement.magnitude == 0) {
       this.#tooltip.textContent = `Hide the Toolbar. ${boundKey}`;
+      this.#tooltip.pointerDisplacement = -113;
     } else {
       this.#tooltip.textContent = `Reposition the Toolbar. ${boundKey}`;
+      this.#tooltip.pointerDisplacement = -144;
     }
   }
 

@@ -52,6 +52,8 @@ export class RedoButton<B extends Nucleobase, F> {
 
     this.#tooltip.owner = this.domNode;
 
+    this.#tooltip.padding = 12;
+
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
     this.#keyBindings.push(new KeyBinding('Z', () => this.press(), { ctrlKey: true, shiftKey: true }));

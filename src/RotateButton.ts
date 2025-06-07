@@ -68,6 +68,8 @@ export class RotateButton<B extends Nucleobase, F> {
 
     this.#tooltip.owner = this.domNode;
 
+    this.#tooltip.padding = 12;
+
     targetApp.selectedBases.addEventListener('change', () => this.#refresh());
 
     this.#refresh();
