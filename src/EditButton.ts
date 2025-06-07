@@ -32,7 +32,7 @@ export class EditButton<B extends Nucleobase, F> {
 
     this.#tooltip.owner = this.domNode;
 
-    this.#tooltip.padding = 12;
+    this.#tooltip.padding = 13;
   }
 
   press(): void {

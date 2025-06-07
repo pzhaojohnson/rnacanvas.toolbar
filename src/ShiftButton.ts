@@ -54,7 +54,7 @@ export class ShiftButton<B extends Nucleobase, F> {
 
     this.#tooltip.owner = this.domNode;
 
-    this.#tooltip.padding = 12;
+    this.#tooltip.padding = 11;
 
     targetApp.selectedBases.addEventListener('change', () => this.#refresh());
 

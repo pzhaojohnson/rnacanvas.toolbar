@@ -39,7 +39,7 @@ export class LayoutButton<B extends Nucleobase, F> {
 
     this.#tooltip.owner = this.domNode;
 
-    this.#tooltip.padding = 12;
+    this.#tooltip.padding = 13;
 
     this.#refresh();
   }
