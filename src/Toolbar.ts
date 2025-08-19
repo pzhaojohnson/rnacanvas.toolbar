@@ -143,6 +143,13 @@ export class Toolbar<B extends Nucleobase, F> {
     this.domNode.style.visibility = 'visible';
   }
 
+  /**
+   * An alias for the `unhide()` method.
+   */
+  show(): void {
+    this.unhide();
+  }
+
   isHidden(): boolean {
     // keep in mind that an invalid visibility style value results in a visible element
     return ['hidden', 'collapse'].includes(this.domNode.style.visibility);
