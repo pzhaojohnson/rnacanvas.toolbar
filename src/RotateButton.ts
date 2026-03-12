@@ -45,10 +45,12 @@ export class RotateButton<B extends Nucleobase, F> {
       <path
         d="M 18 18 A 6 6 0 1 1 6, 6"
         stroke="white" stroke-width="1" fill="none"
+        style="fill: none;"
       ></path>
       <path
         d="M 6 18 A 6 6 0 1 1 18, 6"
         stroke="white"l stroke-width="1" fill="none"
+        style="fill: none;"
       ></path>
       <path
         d="M 18 6 l 3 -3 v 6 h -6 z"

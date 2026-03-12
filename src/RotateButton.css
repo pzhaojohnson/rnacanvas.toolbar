@@ -15,3 +15,8 @@
 .draggable:active {
   cursor: grabbing;
 }
+
+.draggable:active path {
+  stroke: yellow;
+  fill: yellow;
+}
