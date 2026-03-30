@@ -20,6 +20,8 @@ import { RedoButton } from './RedoButton';
 
 import { EditButton } from './EditButton';
 
+import { FindButton } from './FindButton';
+
 import type { App } from './App';
 
 import type { Nucleobase } from './Nucleobase';
@@ -53,6 +55,8 @@ export class Toolbar<B extends Nucleobase, F> {
   #redoButton;
 
   #editButton;
+
+  #findButton;
 
   private readonly dragTranslater: DragTranslater;
 
@@ -89,6 +93,9 @@ export class Toolbar<B extends Nucleobase, F> {
 
     this.#editButton = new EditButton(targetApp);
     this.domNode.append(this.#editButton.domNode);
+
+    this.#findButton = new FindButton(targetApp);
+    this.domNode.append(this.#findButton.domNode);
 
     this.dragTranslater = new DragTranslater(this.domNode);
     this.dragTranslater.interactionDepth = 'deep';
@@ -163,6 +170,7 @@ export class Toolbar<B extends Nucleobase, F> {
       ...this.#undoButton.keyBindings,
       ...this.#redoButton.keyBindings,
       ...this.#layoutButton.keyBindings,
+      ...this.#findButton.keyBindings,
     ];
   }
 }

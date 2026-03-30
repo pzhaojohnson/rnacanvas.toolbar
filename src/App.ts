@@ -82,7 +82,7 @@ export interface App<B extends Nucleobase, F> {
     addEventListener(name: 'change', listener: () => void): void;
   }
 
-  openForm(form: F | 'edit'): void;
+  openForm(form: F | 'edit' | 'find'): void;
 
   forms: {
     'layout': F;
