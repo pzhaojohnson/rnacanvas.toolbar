@@ -48,8 +48,8 @@ export class FindButton<B extends Nucleobase, F> {
         fill="none"
       ></circle>
       <line
-        x1="12.24" y1="12.24" y2="21" x2="21"
-        stroke="white" stroke-width="2"
+        x1="12.95" y1="12.95" y2="21" x2="21"
+        stroke="white" stroke-width="2" stroke-linecap="round"
       ></line>
     `;
 
