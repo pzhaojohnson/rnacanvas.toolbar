@@ -18,9 +18,9 @@ export class ToolbarToggle<B extends Nucleobase, F> {
 
   #boundKey?: string;
 
-  #targetApp: App<B, F>;
+  #targetApp: App;
 
-  constructor(targetApp: App<B, F>) {
+  constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles['toolbar-toggle']);
@@ -120,9 +120,9 @@ export class ToolbarToggle<B extends Nucleobase, F> {
   }
 }
 
-interface App<B extends Nucleobase, F> {
+interface App {
   /**
    * The toolbar of the app.
    */
-  readonly toolbar: Toolbar<B, F>;
+  readonly toolbar: Toolbar;
 }

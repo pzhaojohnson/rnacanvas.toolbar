@@ -7,7 +7,7 @@ import type { TertiaryBond } from './TertiaryBond';
 /**
  * The app interface used by the toolbar.
  */
-export interface App<B extends Nucleobase, F> {
+export interface App {
   readonly drawing: {
     readonly domNode: SVGSVGElement;
 
@@ -17,14 +17,14 @@ export interface App<B extends Nucleobase, F> {
      * The ordering of bases in this iterable
      * is the ordering of bases in the drawing of the app.
      */
-    readonly bases: Iterable<B>;
+    readonly bases: Iterable<Nucleobase>;
 
     /**
      * Rotates the specified bases by the given angle.
      *
      * Also rotates any elements attached to the bases (such as base numberings).
      */
-    rotate(bases: B[], angle: number): void;
+    rotate(bases: Nucleobase[], angle: number): void;
 
     readonly horizontalClientScaling: number;
     readonly verticalClientScaling: number;
@@ -32,7 +32,7 @@ export interface App<B extends Nucleobase, F> {
     /**
      * All secondary bonds in the drawing.
      */
-    readonly secondaryBonds: Iterable<SecondaryBond<B>>;
+    readonly secondaryBonds: Iterable<SecondaryBond>;
 
     /**
      * Adds a secondary bond between the two bases.
@@ -42,7 +42,7 @@ export interface App<B extends Nucleobase, F> {
     /**
      * All tertiary bonds in the drawing.
      */
-    readonly tertiaryBonds: Iterable<TertiaryBond<B>>;
+    readonly tertiaryBonds: Iterable<TertiaryBond>;
 
     /**
      * Adds a tertiary bond between bases 1 and 2.
@@ -54,12 +54,12 @@ export interface App<B extends Nucleobase, F> {
    * Represents the set of currently selected bases.
    */
   readonly selectedBases: {
-    [Symbol.iterator](): Iterator<B>;
+    [Symbol.iterator](): Iterator<Nucleobase>;
 
     /**
      * Adds all of the specified bases to the set of currently selected bases.
      */
-    addAll(bases: Iterable<B>): void;
+    addAll(bases: Iterable<Nucleobase>): void;
 
     /**
      * The specified listener is to be called
@@ -94,9 +94,5 @@ export interface App<B extends Nucleobase, F> {
     addEventListener(name: 'change', listener: () => void): void;
   }
 
-  openForm(form: F | 'edit' | 'find'): void;
-
-  forms: {
-    'layout': F;
-  };
+  openForm(form: 'layout' | 'edit' | 'find'): void;
 }

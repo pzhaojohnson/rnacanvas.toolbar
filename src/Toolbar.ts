@@ -33,12 +33,12 @@ import { Vector } from '@rnacanvas/vectors.oopified';
 /**
  * The toolbar for the RNAcanvas app.
  */
-export class Toolbar<B extends Nucleobase, F> {
+export class Toolbar {
   readonly domNode = document.createElement('div');
 
-  #targetApp: App<B, F>;
+  #targetApp: App;
 
-  #selectInterveningButton: SelectInterveningButton<B, F>;
+  #selectInterveningButton: SelectInterveningButton;
 
   #shiftButton;
 
@@ -60,7 +60,7 @@ export class Toolbar<B extends Nucleobase, F> {
 
   private readonly dragTranslater: DragTranslater;
 
-  constructor(targetApp: App<B, F>) {
+  constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles.toolbar);

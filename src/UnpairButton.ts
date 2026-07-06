@@ -29,7 +29,7 @@ export class UnpairButton<B extends Nucleobase, F> {
 
   #drawingObserver;
 
-  constructor(targetApp: App<B, F>) {
+  constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles['unpair-button']);
@@ -167,7 +167,7 @@ export class UnpairButton<B extends Nucleobase, F> {
   }
 }
 
-type Bond = SecondaryBond<Nucleobase> | TertiaryBond<Nucleobase>;
+type Bond = SecondaryBond | TertiaryBond;
 
 class Bond_ {
   readonly #bond;

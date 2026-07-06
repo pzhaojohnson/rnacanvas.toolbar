@@ -1,8 +1,8 @@
 import type { Nucleobase } from './Nucleobase';
 
-export interface SecondaryBond<B extends Nucleobase> {
-  readonly base1: B;
-  readonly base2: B;
+export interface SecondaryBond {
+  readonly base1: Nucleobase;
+  readonly base2: Nucleobase;
 
   remove(): void;
 }

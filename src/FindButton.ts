@@ -29,7 +29,7 @@ export class FindButton<B extends Nucleobase, F> {
 
   readonly #keyBindings: KeyBinding[] = [];
 
-  constructor(targetApp: App<B, F>) {
+  constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles['find-button']);

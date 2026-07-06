@@ -4,15 +4,13 @@ import { ToolbarButton } from './ToolbarButton';
 
 import type { App } from './App';
 
-import type { Nucleobase } from './Nucleobase';
-
 import { min, max } from '@rnacanvas/math';
 
 import { KeyBinding } from '@rnacanvas/utilities';
 
 import { Tooltip } from '@rnacanvas/tooltips';
 
-export class SelectInterveningButton<B extends Nucleobase, F> {
+export class SelectInterveningButton {
   readonly domNode = document.createElement('div');
 
   #button;
@@ -23,7 +21,7 @@ export class SelectInterveningButton<B extends Nucleobase, F> {
 
   #keyBindings: KeyBinding[] = [];
 
-  constructor(targetApp: App<B, F>) {
+  constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles['select-intervening-button']);

@@ -25,7 +25,7 @@ export class ShiftButton<B extends Nucleobase, F> {
 
   #shifted = false;
 
-  constructor(targetApp: App<B, F>) {
+  constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles['shift-button']);

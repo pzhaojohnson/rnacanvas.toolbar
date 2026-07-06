@@ -25,7 +25,7 @@ export class PairButton<B extends Nucleobase, F> {
 
   #keyBindings: KeyBinding[] = [];
 
-  constructor(targetApp: App<B, F>) {
+  constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
     this.domNode.classList.add(styles['pair-button']);

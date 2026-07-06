@@ -21,7 +21,7 @@ export class LayoutButton<B extends Nucleobase, F> {
 
   #keyBindings: KeyBinding[] = [];
 
-  constructor(targetApp: App<B, F>) {
+  constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
     this.#button = new ToolbarButton('Layout');
@@ -51,7 +51,7 @@ export class LayoutButton<B extends Nucleobase, F> {
   }
 
   press(): void {
-    this.#targetApp.openForm(this.#targetApp.forms['layout']);
+    this.#targetApp.openForm('layout');
   }
 
   get keyBindings(): Iterable<{ owner: Element | undefined }> {

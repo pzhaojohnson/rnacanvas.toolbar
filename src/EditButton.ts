@@ -17,7 +17,7 @@ export class EditButton<B extends Nucleobase, F> {
 
   #targetApp;
 
-  constructor(targetApp: App<B, F>) {
+  constructor(targetApp: App) {
     this.#targetApp = targetApp;
 
     this.#button = new ToolbarButton('Edit');
