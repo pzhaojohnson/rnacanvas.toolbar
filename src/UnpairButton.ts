@@ -63,6 +63,11 @@ export class UnpairButton<B extends Nucleobase, F> {
       { altKey: true },
     ].forEach(options => this.#keyBindings.push(new KeyBinding('U', () => this.press(options), options)));
 
+    // special macOS key binding (since the Option key can change the key itself)
+    ([
+      ['Dead', { altKey: true }],
+    ] as const).forEach(([key, options]) => this.#keyBindings.push(new KeyBinding(key, () => this.press(options), options)));
+
     this.#keyBindings.forEach(kb => kb.owner = this.domNode);
 
     targetApp.selectedBases.addEventListener('change', () => this.#refresh());
