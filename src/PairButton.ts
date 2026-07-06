@@ -54,8 +54,12 @@ export class PairButton<B extends Nucleobase, F> {
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
-    this.#keyBindings.push(new KeyBinding('P', () => this.#press()));
-    this.#keyBindings.push(new KeyBinding('P', () => this.#press({ shiftKey: true }), { shiftKey: true }));
+    [
+      undefined,
+      { shiftKey: true },
+      { altKey: true },
+      { altKey: true, shiftKey: true },
+    ].forEach(options => this.#keyBindings.push(new KeyBinding('P', () => this.#press(options), options)));
 
     this.#keyBindings.forEach(kb => kb.owner = this.domNode);
 
@@ -85,14 +89,27 @@ export class PairButton<B extends Nucleobase, F> {
   #updateTooltipText(): void {
     let ShiftP = detectMacOS() ? '⇧ P' : 'Shift+P';
 
+    let AltP = detectMacOS() ? '⌥ P' : 'Alt+P';
+
+    let ShiftAltP = detectMacOS() ? '⇧ ⌥ P' : 'Shift+Alt+P';
+
     let selectedBases = [...this.#targetApp.selectedBases];
 
     if (selectedBases.length == 0) {
       this.#tooltip.textContent = 'No bases are selected.';
-    } else if (selectedBases.length == 1) {
+    }
+
+    if (selectedBases.length == 1) {
       this.#tooltip.textContent = 'At least two bases must be selected.';
-    } else {
-      this.#tooltip.textContent = `Pair with secondary bonds. [ ${ShiftP} ] Only add missing secondary bonds. [ P ]`;
+    }
+
+    if (selectedBases.length >= 2) {
+      this.#tooltip.textContent = (
+        `Pair with secondary bonds. [ ${ShiftP} ]\n`
+        + 'Only add missing secondary bonds. [ P ]\n'
+        + `Pair with tertiary bonds. [ ${ShiftAltP} ]\n`
+        + `Only add missing tertiary bonds. [ ${AltP} ]`
+      );
     }
   }
 
@@ -108,7 +125,7 @@ export class PairButton<B extends Nucleobase, F> {
     this.#updateTooltipText();
   }
 
-  #press(options?: { shiftKey: boolean }) {
+  #press(options?: { altKey?: boolean, shiftKey?: boolean }) {
     if (this.isDisabled()) {
       return;
     }
@@ -126,9 +143,9 @@ export class PairButton<B extends Nucleobase, F> {
 
     let pairs = antiParallelPairs(selectedBases);
 
-    let secondaryBonds = [...this.#targetApp.drawing.secondaryBonds];
+    let bonds = options?.altKey ? [...this.#targetApp.drawing.tertiaryBonds] : [...this.#targetApp.drawing.secondaryBonds];
 
-    let alreadyPaired = pairs.filter(pr => secondaryBonds.some(sb => pr.includesBoth(sb.base1, sb.base2)));
+    let alreadyPaired = pairs.filter(pr => bonds.some(bond => pr.includesBoth(bond.base1, bond.base2)));
 
     let notAlreadyPaired = pairs.filter(pr => !alreadyPaired.includes(pr));
 
@@ -138,10 +155,12 @@ export class PairButton<B extends Nucleobase, F> {
 
     this.#targetApp.pushUndoStack();
 
+    let addBond = options?.altKey ? 'addTertiaryBond' as const : 'addSecondaryBond' as const;
+
     if (options?.shiftKey) {
-      pairs.forEach(pr => this.#targetApp.drawing.addSecondaryBond(pr[0], pr[1]));
+      pairs.forEach(pr => this.#targetApp.drawing[addBond](pr[0], pr[1]));
     } else {
-      notAlreadyPaired.forEach(pr => this.#targetApp.drawing.addSecondaryBond(pr[0], pr[1]));
+      notAlreadyPaired.forEach(pr => this.#targetApp.drawing[addBond](pr[0], pr[1]));
     }
   }
 

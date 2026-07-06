@@ -6,9 +6,15 @@ import type { App } from './App';
 
 import type { Nucleobase } from './Nucleobase';
 
-import { Tooltip } from '@rnacanvas/tooltips';
+import type { SecondaryBond } from './SecondaryBond';
+
+import type { TertiaryBond } from './TertiaryBond';
 
 import { KeyBinding } from '@rnacanvas/utilities';
+
+import { Tooltip } from '@rnacanvas/tooltips';
+
+import { detectMacOS } from '@rnacanvas/utilities';
 
 export class UnpairButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
@@ -52,7 +58,10 @@ export class UnpairButton<B extends Nucleobase, F> {
 
     this.domNode.style.borderRadius = this.#button.domNode.style.borderRadius;
 
-    this.#keyBindings.push(new KeyBinding('U', () => this.press()));
+    [
+      undefined,
+      { altKey: true },
+    ].forEach(options => this.#keyBindings.push(new KeyBinding('U', () => this.press(options), options)));
 
     this.#keyBindings.forEach(kb => kb.owner = this.domNode);
 
@@ -90,12 +99,21 @@ export class UnpairButton<B extends Nucleobase, F> {
       return;
     }
 
-    let secondaryBonds = [...this.#targetApp.drawing.secondaryBonds];
+    let secondaryBonds = new Bonds([...this.#targetApp.drawing.secondaryBonds]);
 
-    if (secondaryBonds.some(sb => selectedBases.has(sb.base1) || selectedBases.has(sb.base2))) {
-      let s = selectedBases.size == 1 ? '' : 's';
-      this.#tooltip.textContent = `Unpair the selected base${s}. [ U ]`;
-    } else {
+    let tertiaryBonds = new Bonds([...this.#targetApp.drawing.tertiaryBonds]);
+
+    let AltU = detectMacOS() ? '⌥ U' : 'Alt+U';
+
+    if (secondaryBonds.bindAny(selectedBases)) {
+      this.#tooltip.addLine('Remove attached secondary bonds. [ U ]');
+    }
+
+    if (tertiaryBonds.bindAny(selectedBases)) {
+      this.#tooltip.addLine(`Remove attached tertiary bonds. [ ${AltU} ]`);
+    }
+
+    if (!secondaryBonds.bindAny(selectedBases) && !tertiaryBonds.bindAny(selectedBases)) {
       this.#tooltip.textContent = 'The selected bases are already unpaired.';
     }
   }
@@ -118,7 +136,7 @@ export class UnpairButton<B extends Nucleobase, F> {
     this.#updateTooltipText();
   }
 
-  press() {
+  press(options?: { altKey?: boolean }) {
     if (this.isDisabled()) {
       return;
     }
@@ -129,20 +147,67 @@ export class UnpairButton<B extends Nucleobase, F> {
       return;
     }
 
-    let secondaryBonds = [...this.#targetApp.drawing.secondaryBonds];
+    let bondType = options?.altKey ? 'tertiaryBonds' as const : 'secondaryBonds' as const;
 
-    if (!secondaryBonds.some(sb => selectedBases.has(sb.base1) || selectedBases.has(sb.base2))) {
+    let bonds = new Bonds([...this.#targetApp.drawing[bondType]]);
+
+    if (!bonds.bindAny(selectedBases)) {
       return;
     }
 
     this.#targetApp.pushUndoStack();
 
-    secondaryBonds
-      .filter(sb => selectedBases.has(sb.base1) || selectedBases.has(sb.base2))
-      .forEach(sb => sb.remove());
+    [...bonds]
+      .filter(bond => bond.bindsAny(selectedBases))
+      .forEach(bond => bond.remove());
   }
 
   get keyBindings(): Iterable<{ owner: Element | undefined }> {
     return [...this.#keyBindings];
+  }
+}
+
+type Bond = SecondaryBond<Nucleobase> | TertiaryBond<Nucleobase>;
+
+class Bond_ {
+  readonly #bond;
+
+  constructor(bond: Bond) {
+    this.#bond = bond;
+  }
+
+  /**
+   * The bases in the bond.
+   */
+  get bases() {
+    return [this.#bond.base1, this.#bond.base2];
+  }
+
+  binds(b: Nucleobase): boolean {
+    return this.bases.includes(b);
+  }
+
+  bindsAny(bases: Set<Nucleobase>): boolean {
+    return this.bases.some(b => bases.has(b));
+  }
+
+  remove() {
+    this.#bond.remove();
+  }
+}
+
+class Bonds {
+  readonly #bonds;
+
+  constructor(bonds: Bond[]) {
+    this.#bonds = bonds.map(bond => new Bond_(bond));
+  }
+
+  [Symbol.iterator]() {
+    return this.#bonds.values();
+  }
+
+  bindAny(bases: Set<Nucleobase>): boolean {
+    return this.#bonds.some(bond => bond.bindsAny(bases));
   }
 }

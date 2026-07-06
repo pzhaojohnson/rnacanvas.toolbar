@@ -2,6 +2,8 @@ import type { Nucleobase } from './Nucleobase';
 
 import type { SecondaryBond } from './SecondaryBond';
 
+import type { TertiaryBond } from './TertiaryBond';
+
 /**
  * The app interface used by the toolbar.
  */
@@ -36,6 +38,16 @@ export interface App<B extends Nucleobase, F> {
      * Adds a secondary bond between the two bases.
      */
     addSecondaryBond(base1: Nucleobase, base2: Nucleobase): void;
+
+    /**
+     * All tertiary bonds in the drawing.
+     */
+    readonly tertiaryBonds: Iterable<TertiaryBond<B>>;
+
+    /**
+     * Adds a tertiary bond between bases 1 and 2.
+     */
+    addTertiaryBond(base1: Nucleobase, base2: Nucleobase): void;
   };
 
   /**
