@@ -1,6 +1,6 @@
 import * as styles from './ToolbarButton.css';
 
-import { detectMacOS } from '@rnacanvas/utilities';
+import { detectMac } from '@rnacanvas/utilities';
 
 export class ToolbarButton {
   readonly domNode = document.createElement('div');
@@ -44,7 +44,7 @@ function isPrimaryMouseDown(event: MouseEvent): boolean {
     return false;
   }
 
-  if (detectMacOS()) {
+  if (detectMac()) {
     return event.button == 0 && !event.ctrlKey;
   } else {
     return event.button == 0;

@@ -12,7 +12,7 @@ import { KeyBinding } from '@rnacanvas/utilities';
 
 import { Tooltip } from '@rnacanvas/tooltips';
 
-import { detectMacOS } from '@rnacanvas/utilities';
+import { detectMac } from '@rnacanvas/utilities';
 
 export class PairButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
@@ -93,11 +93,11 @@ export class PairButton<B extends Nucleobase, F> {
   }
 
   #updateTooltipText(): void {
-    let ShiftP = detectMacOS() ? '⇧ P' : 'Shift+P';
+    let ShiftP = detectMac() ? '⇧ P' : 'Shift+P';
 
-    let AltP = detectMacOS() ? '⌥ P' : 'Alt+P';
+    let AltP = detectMac() ? '⌥ P' : 'Alt+P';
 
-    let ShiftAltP = detectMacOS() ? '⇧ ⌥ P' : 'Shift+Alt+P';
+    let ShiftAltP = detectMac() ? '⇧ ⌥ P' : 'Shift+Alt+P';
 
     let selectedBases = [...this.#targetApp.selectedBases];
 

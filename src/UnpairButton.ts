@@ -14,7 +14,7 @@ import { KeyBinding } from '@rnacanvas/utilities';
 
 import { Tooltip } from '@rnacanvas/tooltips';
 
-import { detectMacOS } from '@rnacanvas/utilities';
+import { detectMac } from '@rnacanvas/utilities';
 
 export class UnpairButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
@@ -63,11 +63,6 @@ export class UnpairButton<B extends Nucleobase, F> {
       { altKey: true },
     ].forEach(options => this.#keyBindings.push(new KeyBinding('U', () => this.press(options), options)));
 
-    // special macOS key binding (since the Option key can change the key itself)
-    ([
-      ['Dead', { altKey: true }],
-    ] as const).forEach(([key, options]) => this.#keyBindings.push(new KeyBinding(key, () => this.press(options), options)));
-
     this.#keyBindings.forEach(kb => kb.owner = this.domNode);
 
     targetApp.selectedBases.addEventListener('change', () => this.#refresh());
@@ -108,7 +103,7 @@ export class UnpairButton<B extends Nucleobase, F> {
 
     let tertiaryBonds = new Bonds([...this.#targetApp.drawing.tertiaryBonds]);
 
-    let AltU = detectMacOS() ? '⌥ U' : 'Alt+U';
+    let AltU = detectMac() ? '⌥ U' : 'Alt+U';
 
     if (secondaryBonds.bindAny(selectedBases)) {
       this.#tooltip.addLine('Remove attached secondary bonds. [ U ]');

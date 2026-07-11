@@ -10,7 +10,7 @@ import { KeyBinding } from '@rnacanvas/utilities';
 
 import { Tooltip } from '@rnacanvas/tooltips';
 
-import { detectMacOS } from '@rnacanvas/utilities';
+import { detectMac } from '@rnacanvas/utilities';
 
 export class UndoButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
@@ -85,7 +85,7 @@ export class UndoButton<B extends Nucleobase, F> {
   }
 
   #updateTooltipText(): void {
-    let boundKey = detectMacOS() ? '[ ⌘ Z ]' : '[ Ctrl+Z ]';
+    let boundKey = detectMac() ? '[ ⌘ Z ]' : '[ Ctrl+Z ]';
 
     if (this.#targetApp.undoStack.isEmpty()) {
       this.#tooltip.textContent = `Can't undo.`;

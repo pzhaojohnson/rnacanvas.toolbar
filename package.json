@@ -1,6 +1,6 @@
 {
   "name": "@rnacanvas/toolbar",
-  "version": "23.0.1",
+  "version": "23.0.2",
   "description": "The Toolbar",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "@rnacanvas/layout": "^1.0.0",
     "@rnacanvas/math": "^1.17.0",
     "@rnacanvas/tooltips": "^1.5.0",
-    "@rnacanvas/utilities": "^5.0.0",
+    "@rnacanvas/utilities": "^8.1.0",
     "@rnacanvas/vectors.oopified": "^1.4.0",
     "@svgdotjs/svg.js": "^3.2.4",
     "jquery": "^3.7.1"

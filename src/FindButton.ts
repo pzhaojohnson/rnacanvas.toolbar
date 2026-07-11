@@ -8,7 +8,7 @@ import { ToolbarButton } from './ToolbarButton';
 
 import { Tooltip } from '@rnacanvas/tooltips';
 
-import { detectMacOS } from '@rnacanvas/utilities';
+import { detectMac } from '@rnacanvas/utilities';
 
 import { KeyBinding } from '@rnacanvas/utilities';
 
@@ -20,7 +20,7 @@ export class FindButton<B extends Nucleobase, F> {
   readonly #button;
 
   readonly #tooltip = new Tooltip(`Open the Find form. ${
-    detectMacOS() ? (
+    detectMac() ? (
       '[ ⌘ F ]'
     ) : (
       '[ Ctrl+F ]'

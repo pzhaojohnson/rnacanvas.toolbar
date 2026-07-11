@@ -8,7 +8,7 @@ import type { Nucleobase } from './Nucleobase';
 
 import { Tooltip } from '@rnacanvas/tooltips';
 
-import { detectMacOS } from '@rnacanvas/utilities';
+import { detectMac } from '@rnacanvas/utilities';
 
 import { midpoint } from '@rnacanvas/points';
 
@@ -92,7 +92,7 @@ export class RotateButton<B extends Nucleobase, F> {
   #updateTooltipText(): void {
     let numSelectedBases = [...this.#targetApp.selectedBases].length;
 
-    let Alt = detectMacOS() ? '⌥' : 'Alt';
+    let Alt = detectMac() ? '⌥' : 'Alt';
 
     if (numSelectedBases == 0) {
       this.#tooltip.textContent = 'No bases are selected.';
@@ -124,7 +124,7 @@ export class RotateButton<B extends Nucleobase, F> {
 
     if (event.button != 0) {
       return;
-    } else if (detectMacOS() && event.ctrlKey) {
+    } else if (detectMac() && event.ctrlKey) {
       return;
     }
 

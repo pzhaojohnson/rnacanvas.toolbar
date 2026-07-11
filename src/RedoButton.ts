@@ -10,7 +10,7 @@ import { KeyBinding } from '@rnacanvas/utilities';
 
 import { Tooltip } from '@rnacanvas/tooltips';
 
-import { detectMacOS } from '@rnacanvas/utilities';
+import { detectMac } from '@rnacanvas/utilities';
 
 export class RedoButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
@@ -85,7 +85,7 @@ export class RedoButton<B extends Nucleobase, F> {
   }
 
   #updateTooltipText(): void {
-    let boundKey = detectMacOS() ? '[ ⇧ ⌘ Z ]' : '[ Shift+Ctrl+Z ]';
+    let boundKey = detectMac() ? '[ ⇧ ⌘ Z ]' : '[ Shift+Ctrl+Z ]';
 
     if (this.#targetApp.redoStack.isEmpty()) {
       this.#tooltip.textContent = `Can't redo.`;

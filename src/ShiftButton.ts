@@ -10,7 +10,7 @@ import { shift } from '@rnacanvas/layout';
 
 import { Tooltip } from '@rnacanvas/tooltips';
 
-import { detectMacOS } from '@rnacanvas/utilities';
+import { detectMac } from '@rnacanvas/utilities';
 
 export class ShiftButton<B extends Nucleobase, F> {
   readonly domNode = document.createElement('div');
@@ -106,7 +106,7 @@ export class ShiftButton<B extends Nucleobase, F> {
 
     if (event.button != 0) {
       return;
-    } else if (detectMacOS() && event.ctrlKey) {
+    } else if (detectMac() && event.ctrlKey) {
       return;
     }
 

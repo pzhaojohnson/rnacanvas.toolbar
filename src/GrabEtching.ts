@@ -2,7 +2,7 @@ import * as styles from './GrabEtching.css';
 
 import { Tooltip } from '@rnacanvas/tooltips';
 
-import { detectMacOS } from '@rnacanvas/utilities';
+import { detectMac } from '@rnacanvas/utilities';
 
 export function GrabEtching() {
   let grabEtching = document.createElement('div');
@@ -20,7 +20,7 @@ export function GrabEtching() {
     Line(),
   );
 
-  let secondaryClick = detectMacOS() ? 'Control-click' : 'Right-click'
+  let secondaryClick = detectMac() ? 'Control-click' : 'Right-click'
 
   let tooltip = new Tooltip(`Anywhere along the Toolbar can be dragged. ${secondaryClick} when dragging to avoid pressing buttons.`);
 
