@@ -99,6 +99,9 @@ export class UnpairButton<B extends Nucleobase, F> {
       return;
     }
 
+    // reset text content first
+    this.#tooltip.textContent = '';
+
     let secondaryBonds = new Bonds([...this.#targetApp.drawing.secondaryBonds]);
 
     let tertiaryBonds = new Bonds([...this.#targetApp.drawing.tertiaryBonds]);
@@ -125,9 +128,9 @@ export class UnpairButton<B extends Nucleobase, F> {
       this.#disable();
     }
 
-    let secondaryBonds = [...this.#targetApp.drawing.secondaryBonds];
+    let bonds = new Bonds([...this.#targetApp.drawing.secondaryBonds, ...this.#targetApp.drawing.tertiaryBonds]);
 
-    if (secondaryBonds.some(sb => selectedBases.has(sb.base1) || selectedBases.has(sb.base2))) {
+    if (bonds.bindAny(selectedBases)) {
       this.#enable();
     } else {
       this.#disable();
