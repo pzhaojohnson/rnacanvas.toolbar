@@ -117,7 +117,10 @@ export class UnpairButton<B extends Nucleobase, F> {
     }
 
     if (!secondaryBonds.bindAny(selectedBases) && !tertiaryBonds.bindAny(selectedBases)) {
-      this.#tooltip.textContent = 'The selected bases are already unpaired.';
+      let s = selectedBases.size == 1 ? '' : 's';
+      let are = selectedBases.size == 1 ? 'is' : 'are';
+
+      this.#tooltip.textContent = `The selected base${s} ${are} already unpaired.`;
     }
   }
 
